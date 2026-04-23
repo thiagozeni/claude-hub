@@ -2,3 +2,7 @@
 logs/
 _info/
 __pycache__/
+.env
+.env.local
+service_account.json
+*.pem
