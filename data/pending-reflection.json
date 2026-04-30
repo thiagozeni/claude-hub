@@ -1,42 +1,34 @@
 {
-  "date": "2026-04-23",
+  "date": "2026-04-30",
   "status": "completed",
-  "generatedAt": "2026-04-23T12:32:01.849204",
-  "completedAt": "2026-04-23T12:45:00.000000",
+  "generatedAt": "2026-04-30T10:42:13.678940-03:00",
+  "completedAt": "2026-04-30T11:00:00.000000-03:00",
   "completedBy": "agent",
-  "note": "Sem aprendizados substantivos — todos os commits do dia foram chore(security): complementa .gitignore em 7 projetos (cachorradas-estudios, eat-kitchen-concierge, alugueis-bea, claude-hub, magma, thiago-zeni, werdum-fight). Sessão de hardening de .gitignore sem mudança funcional.",
   "projectsModified": [
-    "cachorradas-estudios",
-    "eat-kitchen-concierge",
     "alugueis-bea",
     "claude-hub",
-    "magma",
     "thiago-zeni",
-    "werdum-fight"
+    "game"
   ],
   "gitSummary": [
     {
       "project": "cachorradas-estudios",
       "hasGit": true,
-      "commits": 1,
-      "messages": [
-        "dce53b7 chore(security): complementa .gitignore"
-      ],
+      "commits": 0,
+      "messages": [],
       "uncommitted": 0,
       "uncommittedFiles": [],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "dce53b7",
-        "message": "chore(security): complementa .gitignore"
+        "hash": "1e704b8",
+        "message": "feat(footer): adiciona contato cachorradasestudios@gmail.com no footer"
       }
     },
     {
       "project": "eat-kitchen-concierge",
       "hasGit": true,
-      "commits": 1,
-      "messages": [
-        "c6033cd chore(security): complementa .gitignore"
-      ],
+      "commits": 0,
+      "messages": [],
       "uncommitted": 0,
       "uncommittedFiles": [],
       "recentFiles": [],
@@ -48,10 +40,8 @@
     {
       "project": "alugueis-bea",
       "hasGit": true,
-      "commits": 1,
-      "messages": [
-        "cb1aa5b chore(security): complementa .gitignore com service_account.json e *.pem"
-      ],
+      "commits": 0,
+      "messages": [],
       "uncommitted": 9,
       "uncommittedFiles": [
         "M db/schema.sql",
@@ -73,16 +63,14 @@
     {
       "project": "claude-hub",
       "hasGit": true,
-      "commits": 1,
-      "messages": [
-        "8172ebb chore(security): complementa .gitignore"
-      ],
+      "commits": 0,
+      "messages": [],
       "uncommitted": 12,
       "uncommittedFiles": [
         "M app.js",
-        "M data/pending-reflection.json",
         "M data/projects.json",
         "M index.html",
+        "M scripts/daily-reflection.py",
         "M server.py",
         "M style.css",
         "M update.py",
@@ -94,36 +82,28 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "8172ebb",
-        "message": "chore(security): complementa .gitignore"
+        "hash": "3d5b607",
+        "message": "chore(reflection): entrada diária 2026-04-23"
       }
     },
     {
       "project": "magma",
       "hasGit": true,
-      "commits": 1,
-      "messages": [
-        "b341af5 chore(security): complementa .gitignore"
-      ],
-      "uncommitted": 3,
-      "uncommittedFiles": [
-        "?? _divulga/",
-        "?? video-fx/Zoom_out_e1e6f639ea.mp4",
-        "?? videos/"
-      ],
+      "commits": 0,
+      "messages": [],
+      "uncommitted": 0,
+      "uncommittedFiles": [],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "b341af5",
-        "message": "chore(security): complementa .gitignore"
+        "hash": "5b5b488",
+        "message": "chore(site): remove pagina /logo/ (aprovacao do logo)"
       }
     },
     {
       "project": "thiago-zeni",
       "hasGit": true,
-      "commits": 1,
-      "messages": [
-        "6544419 chore(security): complementa .gitignore com service_account.json e *.pem"
-      ],
+      "commits": 0,
+      "messages": [],
       "uncommitted": 2,
       "uncommittedFiles": [
         "?? _cases/",
@@ -131,26 +111,59 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "6544419",
-        "message": "chore(security): complementa .gitignore com service_account.json e *.pem"
+        "hash": "d718ccb",
+        "message": "fix(domain): corrige todas referências de thiagozeni.com.br para thiagozeni.com"
       }
     },
     {
-      "project": "werdum-fight",
+      "project": "game",
       "hasGit": true,
       "commits": 1,
       "messages": [
-        "8a96c5f chore(security): complementa .gitignore"
+        "f2c7ada fix(ios-mac): detecção confiável de Mac compat + resume AudioContext"
       ],
+      "uncommitted": 6,
+      "uncommittedFiles": [
+        "D _artes-originais/coco-hit.gif",
+        "D _artes-originais/coco-idle.gif",
+        "D _artes-originais/coco-kick.gif",
+        "D _artes-originais/coco-knockout.gif",
+        "D _artes-originais/coco-punch.gif",
+        "D _artes-originais/coco-walk.gif"
+      ],
+      "recentFiles": [],
+      "latestCommit": {
+        "hash": "f2c7ada",
+        "message": "fix(ios-mac): detecção confiável de Mac compat + resume AudioContext"
+      }
+    },
+    {
+      "project": "landing-page-promocional",
+      "hasGit": true,
+      "commits": 0,
+      "messages": [],
       "uncommitted": 0,
       "uncommittedFiles": [],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "8a96c5f",
-        "message": "chore(security): complementa .gitignore"
+        "hash": "5662079",
+        "message": "feat(analytics): adiciona Google Analytics (G-4YRY0BF18S)"
+      }
+    },
+    {
+      "project": "materiais-social-media",
+      "hasGit": true,
+      "commits": 0,
+      "messages": [],
+      "uncommitted": 0,
+      "uncommittedFiles": [],
+      "recentFiles": [],
+      "latestCommit": {
+        "hash": "4126645",
+        "message": "chore: import materiais social media"
       }
     }
   ],
-  "suggestedTitle": "Trabalho em cachorradas-estudios, eat-kitchen-concierge, alugueis-bea, claude-hub, magma, thiago-zeni, werdum-fight",
-  "originalNote": "Abra o dashboard > Evolução > Diário para completar a reflexão."
+  "suggestedTitle": "Trabalho em alugueis-bea, claude-hub, thiago-zeni, game",
+  "note": "Abra o dashboard > Evolução > Diário para completar a reflexão."
 }

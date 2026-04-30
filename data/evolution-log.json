@@ -1,5 +1,21 @@
 [
   {
+    "id": "log-023",
+    "date": "2026-04-30",
+    "project": "game",
+    "title": "Fix detecção Mac + resume AudioContext — v1.0.4 (build 8)",
+    "learned": [
+      "`navigator.maxTouchPoints === 0` é critério errado para detectar Mac: MacBooks com Magic Trackpad reportam maxTouchPoints=5, causando falso positivo e tela preta. Critério correto: `!('ontouchstart' in window)`, pois Mac não tem touchscreen real",
+      "No Phaser 3, o AudioContext espera evento `touchstart` para desbloquear — em Mac (que usa mouse), o contexto fica `suspended` indefinidamente sem um `resume()` explícito antes de iniciar qualquer música",
+      "Duplicar lógica de detecção entre arquivos (inline em TitleScene vs. função em iosVideo.ts) criou divergência silenciosa: quando a função foi corrigida, a cópia inline continuou com o bug — centralizar em um único ponto de importação é o único jeito seguro"
+    ],
+    "highlight": "Bug de tela preta no Mac rastreado até critério de detecção incorreto que retornava falso positivo com Magic Trackpad. Três arquivos corrigidos: detecção centralizada em isMacCompat(), verificação inline substituída pelo import, e resumeAudioContext() chamado antes de qualquer música.",
+    "commit": "f2c7ada",
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
     "id": "log-022",
     "date": "2026-04-05",
     "project": "thiago-zeni",
