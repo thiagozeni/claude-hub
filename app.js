@@ -54,7 +54,9 @@ const FALLBACK_PROJECTS = [
   { id: "claude-hub", name: "Claude Hub", path: "/Users/pro15/Claude/claude-hub", url: null, repo: "https://github.com/thiagozeni/claude-hub", type: "Site Estático", status: "active", tech: ["Python", "HTML", "CSS", "JavaScript vanilla", "launchd"], description: "Central de informações sobre capacidades do Claude Code: skills, sub-agents, projetos, MCPs, cheatsheet e backlog. Servido em localhost:8080 via LaunchAgent.", highlights: ["Uso interno", "LaunchAgent (com.pro15.claude-hub)", "API /api/processes (pm2 control)"], lastActivity: "2026-04-17" },
   { id: "magma", name: "Magma", path: "/Users/pro15/Claude/magma", url: null, repo: null, type: "Site Estático", status: "active", tech: ["HTML", "CSS", "JavaScript"], description: "Site histórico da banda Magma (Nova Hamburgo/RS, 2001–2025) — discografia, fotos, vídeos e memória da trajetória da banda.", highlights: ["Site comemorativo", "Sem dependências externas"], lastActivity: "2026-03-15" },
   { id: "thiago-zeni", name: "Thiago Zeni", path: "/Users/pro15/Claude/thiago-zeni", url: null, repo: null, type: "Site Estático", status: "active", tech: ["HTML", "CSS", "JavaScript"], description: "Site pessoal de Thiago Zeni — Marketing Digital & Liderança Executiva.", highlights: ["Site pessoal", "Sem dependências externas"], lastActivity: "2026-03-15" },
-  { id: "werdum-fight", name: "Werdum Fight", path: "/Users/pro15/Claude/werdum-fight", url: null, repo: null, type: "Game", status: "active", tech: ["TypeScript", "Vite", "Phaser 3"], description: "Arena Beat'em Up inspirado em Streets of Rage e Final Fight, desenvolvido com Phaser 3.", highlights: ["Arena Beat'em Up", "Phaser 3", "Sprites e personagens customizados"], lastActivity: "2026-03-15" },
+  { id: "3-contra-todos-game", name: "3 Contra Todos — Game", path: "/Users/pro15/Claude/3-contra-todos/game", url: "https://werdumfight.com", repo: "https://github.com/thiagozeni/3-contra-todos-game", type: "Game", status: "active", tech: ["TypeScript", "Vite", "Phaser 3", "Capacitor"], description: "Arena Beat'em Up inspirado em Streets of Rage e Final Fight, desenvolvido com Phaser 3. Web + iOS + Android.", highlights: ["Arena Beat'em Up", "Phaser 3", "App Store + Google Play"], lastActivity: "2026-04-26" },
+  { id: "3-contra-todos-landing", name: "3 Contra Todos — Landing", path: "/Users/pro15/Claude/3-contra-todos/landing-page-promocional", url: "https://3contratodos.com", repo: null, type: "Landing", status: "active", tech: ["HTML", "CSS"], description: "Landing page promocional do jogo 3 Contra Todos.", highlights: [], lastActivity: "2026-04-26" },
+  { id: "3-contra-todos-social", name: "3 Contra Todos — Social Media", path: "/Users/pro15/Claude/3-contra-todos/materiais-social-media", url: null, repo: null, type: "Assets", status: "active", tech: ["HTML", "CSS", "Bash"], description: "Templates de feed/stories e scripts de export para campanhas sociais (apenas local).", highlights: [], lastActivity: "2026-04-26" },
   { id: "ai-router", name: "AI Router", path: "/Users/pro15/Claude/ai-router", url: null, repo: null, type: "Scripts", status: "active", tech: ["Python", "zsh", "MLX", "OpenRouter", "Gemini API", "HuggingFace"], description: "Roteador de IAs com 9 categorias: MLX local (Gemma 4, DeepSeek-R1, Qwen2.5-Coder) + OpenRouter free/paid (Qwen 3.6, Qwen3 Coder, Nemotron, Qwen3.5-flash, o4-mini) + Gemini 2.5 Pro. Classifica prompts e despacha pro modelo adequado.", highlights: ["9 categorias (private/vision/bulk/hard_reasoning/review/coding/reasoning/research/general)", "MLX local + OpenRouter + Gemini", "Shell scripts (~/ai-*.sh) + Python CLI"], lastActivity: "2026-04-17" }
 ];
 
@@ -205,7 +207,7 @@ function copyToClipboard(text, el) {
 
 /* ─── Navigation ─── */
 
-const SECTIONS = ['skills', 'agents', 'processos', 'projects', 'mcps', 'airouter', 'cheatsheet', 'backlog', 'evolucao'];
+const SECTIONS = ['skills', 'agents', 'processos', 'projects', 'mcps', 'airouter', 'hooks', 'security', 'cheatsheet', 'backlog', 'evolucao'];
 const SECTION_LABELS = {
   skills: 'Skills',
   agents: 'Sub-Agents',
@@ -213,6 +215,8 @@ const SECTION_LABELS = {
   projects: 'Projetos',
   mcps: 'MCPs / Tools',
   airouter: 'AI Router',
+  hooks: 'Hooks',
+  security: 'Security',
   cheatsheet: 'Cheatsheet',
   backlog: 'Backlog',
   evolucao: 'Evolução'
@@ -263,6 +267,8 @@ function closeSidebar() {
 
 let allSkills = [];
 let activeFilter = 'Todos';
+let skillsQuery = '';
+let skillsSearchBound = false;
 
 function renderSkills(skills) {
   const categories = ['Todos', ...new Set(skills.map(s => s.category))];
@@ -281,7 +287,25 @@ function renderSkills(skills) {
     filterBar.appendChild(btn);
   });
 
-  const filtered = activeFilter === 'Todos' ? skills : skills.filter(s => s.category === activeFilter);
+  const searchInput = document.getElementById('skills-search');
+  if (searchInput && !skillsSearchBound) {
+    searchInput.value = skillsQuery;
+    searchInput.addEventListener('input', (e) => {
+      skillsQuery = e.target.value.trim().toLowerCase();
+      renderSkills(allSkills);
+    });
+    skillsSearchBound = true;
+  }
+
+  let filtered = activeFilter === 'Todos' ? skills : skills.filter(s => s.category === activeFilter);
+  if (skillsQuery) {
+    filtered = filtered.filter(s =>
+      (s.name || '').toLowerCase().includes(skillsQuery) ||
+      (s.description || '').toLowerCase().includes(skillsQuery) ||
+      (s.trigger || '').toLowerCase().includes(skillsQuery) ||
+      (s.category || '').toLowerCase().includes(skillsQuery)
+    );
+  }
   const grid = document.getElementById('skills-grid');
   grid.innerHTML = '';
 
@@ -360,7 +384,13 @@ function renderProjects(projects) {
   const grid = document.getElementById('projects-grid');
   grid.innerHTML = '';
 
-  projects.forEach(project => {
+  const sorted = [...projects].sort((a, b) => {
+    const da = a.lastActivity || '';
+    const db = b.lastActivity || '';
+    return db.localeCompare(da);
+  });
+
+  sorted.forEach(project => {
     const card = document.createElement('article');
     card.className = 'card';
     card.setAttribute('aria-label', `Projeto: ${project.name}`);
@@ -761,6 +791,120 @@ function renderMCPs(data) {
   });
 }
 
+/* ─── Hooks ─── */
+
+const FALLBACK_HOOKS = [];
+
+let allHooks = [];
+let currentHookFilter = 'all';
+
+function eventChipClass(event) {
+  const map = {
+    'PreToolUse': 'event-pre',
+    'PostToolUse': 'event-post',
+    'Stop': 'event-stop'
+  };
+  return map[event] || 'event-other';
+}
+
+function categoryLabel(cat) {
+  const map = {
+    'type-check': 'Type-check',
+    'cache-clear': 'Cache',
+    'telemetry': 'Telemetria',
+    'review': 'Review',
+    'security': 'Security'
+  };
+  return map[cat] || cat;
+}
+
+function renderHooksFilter(hooks) {
+  const bar = document.getElementById('hooks-filter');
+  if (!bar) return;
+  bar.innerHTML = '';
+
+  const events = Array.from(new Set(hooks.map(h => h.event))).sort();
+  const all = ['all', ...events];
+
+  all.forEach(ev => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (currentHookFilter === ev ? ' active' : '');
+    btn.textContent = ev === 'all' ? `Todos (${hooks.length})` : `${ev} (${hooks.filter(h => h.event === ev).length})`;
+    btn.addEventListener('click', () => {
+      currentHookFilter = ev;
+      renderHooks(allHooks);
+    });
+    bar.appendChild(btn);
+  });
+}
+
+function renderHooks(hooks) {
+  allHooks = hooks;
+  renderHooksFilter(hooks);
+
+  const grid = document.getElementById('hooks-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  const filtered = currentHookFilter === 'all'
+    ? hooks
+    : hooks.filter(h => h.event === currentHookFilter);
+
+  filtered.forEach(hook => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.setAttribute('aria-label', `Hook: ${hook.name}`);
+
+    const triggersHTML = (hook.triggers || []).map(t =>
+      `<li class="use-case-item">${escapeHtml(t)}</li>`
+    ).join('');
+
+    const controlsHTML = (hook.controls || []).map(c => `
+      <tr>
+        <td class="hook-control-label">${escapeHtml(c.label)}</td>
+        <td class="hook-control-value"><code>${escapeHtml(c.value)}</code></td>
+      </tr>
+    `).join('');
+
+    const projectsHTML = hook.projects && hook.projects.length
+      ? `<div class="hook-projects"><span class="hook-section-label">Projetos com hook ativo:</span> ${hook.projects.map(p => `<span class="chip">${escapeHtml(p)}</span>`).join('')}</div>`
+      : '';
+
+    const costHTML = hook.cost
+      ? `<div class="hook-cost">💰 ${escapeHtml(hook.cost)}</div>`
+      : '';
+
+    const addedAtHTML = hook.addedAt
+      ? `<span class="hook-added-at">adicionado ${escapeHtml(hook.addedAt)}</span>`
+      : '';
+
+    card.innerHTML = `
+      <div class="card-header">
+        <span class="card-name">${escapeHtml(hook.name)}</span>
+        <span class="event-chip ${eventChipClass(hook.event)}">${escapeHtml(hook.event)}</span>
+      </div>
+      <div class="hook-meta">
+        <span class="chip">matcher: <code>${escapeHtml(hook.matcher || '(any)')}</code></span>
+        <span class="chip">${escapeHtml(categoryLabel(hook.category))}</span>
+        <span class="chip">${escapeHtml(hook.scope || 'global')}</span>
+        ${addedAtHTML}
+      </div>
+      <p class="card-description">${escapeHtml(hook.description)}</p>
+      ${hook.scriptPath ? `<div class="hook-script-path"><span class="hook-section-label">Script:</span> <code>${escapeHtml(hook.scriptPath)}</code></div>` : ''}
+      ${triggersHTML ? `<div><span class="hook-section-label">Quando dispara:</span><ul class="use-cases-list">${triggersHTML}</ul></div>` : ''}
+      ${controlsHTML ? `<div><span class="hook-section-label">Controles / debug:</span><table class="hook-controls-table">${controlsHTML}</table></div>` : ''}
+      ${projectsHTML}
+      ${costHTML}
+    `;
+
+    grid.appendChild(card);
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p class="empty-state">Nenhum hook neste filtro.</p>';
+  }
+}
+
 /* ─── Cheatsheet ─── */
 
 function renderCheatsheet() {
@@ -1077,9 +1221,16 @@ function renderLearningLog(data, pending) {
         <strong>Reflexão pendente — ${escapeHtml(pending.date || '')}</strong>
         <span>Projetos com atividade: ${escapeHtml(projects || 'nenhum identificado')}</span>
       </div>
-      <span class="pending-banner-hint">Complete no próximo <code>/evolucao</code></span>
+      <button class="pending-banner-btn" id="reflection-run-btn" type="button">
+        Fazer reflexão agora
+        <span class="pending-banner-model-pill">
+          <span class="security-model-dot model-sonnet"></span>
+          sonnet
+        </span>
+      </button>
     `;
     container.appendChild(banner);
+    banner.querySelector('#reflection-run-btn').addEventListener('click', _onReflectionRun);
   }
 
   if (!data || data.length === 0) {
@@ -1616,6 +1767,581 @@ function renderAIHub(data) {
   container.appendChild(bottomRow);
 }
 
+/* ─── Security ─── */
+
+const FALLBACK_SECURITY = {
+  scannedAt: null,
+  summary: { critical: 0, high: 0, medium: 0, low: 0 },
+  findings: []
+};
+
+const SECURITY_SEVERITY_ORDER = ['critical', 'high', 'medium', 'low'];
+const SECURITY_SEVERITY_LABELS = {
+  critical: 'Crítico',
+  high: 'Alto',
+  medium: 'Médio',
+  low: 'Baixo'
+};
+const SECURITY_STATUS_LABELS = {
+  open: 'Aberto',
+  acknowledged: 'Reconhecido',
+  resolved: 'Resolvido',
+  ignored: 'Ignorado'
+};
+
+let _securityData = FALLBACK_SECURITY;
+let _securityFilter = 'open';  // default: só mostrar abertos
+
+function _formatScannedAt(iso) {
+  if (!iso) return '—';
+  try {
+    const dt = new Date(iso);
+    return dt.toLocaleString('pt-BR', {
+      day: '2-digit', month: '2-digit', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+  } catch {
+    return iso;
+  }
+}
+
+function renderSecurity(data) {
+  _securityData = data || FALLBACK_SECURITY;
+  const summaryEl = document.getElementById('security-summary');
+  const filterEl = document.getElementById('security-filter');
+  const listEl = document.getElementById('security-findings');
+  if (!summaryEl || !filterEl || !listEl) return;
+
+  const findings = _securityData.findings || [];
+  const summary = _securityData.summary || { critical: 0, high: 0, medium: 0, low: 0 };
+  const openCount = findings.filter(f => f.status === 'open').length;
+  const ackCount = findings.filter(f => f.status === 'acknowledged').length;
+  const ignoredCount = findings.filter(f => f.status === 'ignored').length;
+
+  const hasAny = findings.length > 0;
+  const allClear = openCount === 0 && ackCount === 0;
+
+  summaryEl.innerHTML = `
+    <div class="security-summary-row">
+      <div class="security-summary-headline ${allClear ? 'is-clear' : ''}">
+        ${allClear
+          ? '<span class="security-clear-badge">Nenhum item aberto ou reconhecido</span>'
+          : `<span class="security-open-count">${openCount}</span>
+             <span class="security-open-label">aberto${openCount === 1 ? '' : 's'}</span>
+             ${ackCount > 0 ? `<span class="security-ack-count">+${ackCount} reconhecido${ackCount === 1 ? '' : 's'}</span>` : ''}`
+        }
+      </div>
+      <div class="security-severity-counts">
+        ${SECURITY_SEVERITY_ORDER.map(sev => `
+          <span class="security-sev-pill severity-${sev}" title="${SECURITY_SEVERITY_LABELS[sev]}">
+            <span class="security-sev-dot"></span>
+            <span class="security-sev-label">${SECURITY_SEVERITY_LABELS[sev]}</span>
+            <span class="security-sev-num">${summary[sev] || 0}</span>
+          </span>
+        `).join('')}
+      </div>
+      <div class="security-scanned-at">
+        Varredura: <strong>${_formatScannedAt(_securityData.scannedAt)}</strong>
+      </div>
+    </div>
+  `;
+
+  const filters = [
+    { id: 'open',         label: `Abertos (${openCount})` },
+    { id: 'acknowledged', label: `Reconhecidos (${ackCount})` },
+    { id: 'ignored',      label: `Ignorados (${ignoredCount})` },
+    { id: 'all',          label: `Todos (${findings.length})` }
+  ];
+  filterEl.innerHTML = filters.map(f => `
+    <button class="filter-btn ${_securityFilter === f.id ? 'active' : ''}" data-security-filter="${f.id}">
+      ${escapeHtml(f.label)}
+    </button>
+  `).join('');
+  filterEl.querySelectorAll('[data-security-filter]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      _securityFilter = btn.dataset.securityFilter;
+      renderSecurity(_securityData);
+    });
+  });
+
+  if (!hasAny) {
+    listEl.innerHTML = `<p class="security-empty">Sem achados. Rode <code>python3 update.py</code> para atualizar.</p>`;
+    return;
+  }
+
+  const visible = findings.filter(f => _securityFilter === 'all' ? true : f.status === _securityFilter);
+  if (visible.length === 0) {
+    listEl.innerHTML = `<p class="security-empty">Nenhum item com este filtro.</p>`;
+    return;
+  }
+
+  // Quando filtro = 'open', agrupar por (category, project) e mostrar botão "Resolver N"
+  if (_securityFilter === 'open') {
+    const groups = _groupFindings(visible);
+    listEl.innerHTML = groups.map(g => _renderSecurityGroup(g)).join('');
+    listEl.querySelectorAll('[data-resolve-group]').forEach(btn => {
+      btn.addEventListener('click', _onSecurityResolveGroup);
+    });
+  } else {
+    listEl.innerHTML = visible.map(f => _renderSecurityCard(f)).join('');
+  }
+  // Bind listeners nos botões recém-criados (status + suggest)
+  listEl.querySelectorAll('[data-security-action]').forEach(btn => {
+    btn.addEventListener('click', _onSecurityAction);
+  });
+  listEl.querySelectorAll('[data-security-suggest]').forEach(btn => {
+    btn.addEventListener('click', _onSecuritySuggest);
+  });
+}
+
+/* Agrupar findings por (category, project) e anexar metadata de modelo. */
+const SECURITY_MODEL_BY_CATEGORY = {
+  gitignore: 'haiku',
+  'remote-auth': 'haiku',
+  secrets: 'sonnet',
+  'tracked-sensitive': 'opus'
+};
+
+function _effectiveCategory(f) {
+  if (f.category === 'secrets' && f.project !== 'workspace') return 'secrets-in-code';
+  return f.category;
+}
+
+function _groupFindings(findings) {
+  const groups = new Map();
+  for (const f of findings) {
+    const cat = _effectiveCategory(f);
+    const key = `${cat}::${f.project}`;
+    if (!groups.has(key)) {
+      groups.set(key, {
+        id: key,
+        category: cat,
+        project: f.project,
+        items: [],
+        model: cat === 'secrets-in-code' ? 'opus' : (SECURITY_MODEL_BY_CATEGORY[cat] || 'sonnet')
+      });
+    }
+    groups.get(key).items.push(f);
+  }
+  // Ordenar por severidade max descendente, depois categoria, projeto
+  const sevOrder = { critical: 0, high: 1, medium: 2, low: 3 };
+  const maxSev = g => g.items.reduce((m, f) => Math.min(m, sevOrder[f.severity] ?? 9), 9);
+  return [...groups.values()].sort((a, b) => maxSev(a) - maxSev(b) || a.category.localeCompare(b.category));
+}
+
+function _renderSecurityGroup(g) {
+  const cardsHtml = g.items.map(f => _renderSecurityCard(f)).join('');
+  const categoryLabel = {
+    gitignore: '.gitignore incompleto',
+    'remote-auth': 'Remote HTTPS',
+    secrets: 'Secrets em plaintext',
+    'secrets-in-code': 'Secret em código trackeado',
+    'tracked-sensitive': 'Arquivo sensível trackeado'
+  }[g.category] || g.category;
+
+  return `
+    <section class="security-group" data-group-id="${escapeHtml(g.id)}">
+      <header class="security-group-header">
+        <div class="security-group-title">
+          <span class="security-group-category">${escapeHtml(categoryLabel)}</span>
+          <span class="security-group-project">${escapeHtml(g.project)}</span>
+          <span class="security-group-count">${g.items.length} ${g.items.length === 1 ? 'item' : 'itens'}</span>
+        </div>
+        <div class="security-group-actions">
+          <span class="security-group-model" title="Modelo que será usado pelo agente">
+            <span class="security-model-dot model-${escapeHtml(g.model)}"></span>
+            ${escapeHtml(g.model)}
+          </span>
+          <button class="security-resolve-btn" data-resolve-group="${escapeHtml(g.id)}">
+            Resolver ${g.items.length} ${g.items.length === 1 ? 'item' : 'itens'}
+          </button>
+        </div>
+      </header>
+      <div class="security-group-cards">${cardsHtml}</div>
+    </section>
+  `;
+}
+
+function _renderSecurityCard(f) {
+  const status = f.status || 'open';
+  // Ações disponíveis por status atual
+  const actions = [];
+  if (status !== 'acknowledged') actions.push({ a: 'acknowledged', label: 'Reconhecer' });
+  if (status !== 'resolved')     actions.push({ a: 'resolved',     label: 'Resolver' });
+  if (status !== 'ignored')      actions.push({ a: 'ignored',      label: 'Ignorar' });
+  if (status !== 'open')         actions.push({ a: 'open',         label: 'Reabrir' });
+
+  const actionsHtml = actions.map(({ a, label }) => `
+    <button class="security-action-btn" data-security-action="${escapeHtml(a)}" data-finding-id="${escapeHtml(f.id)}">
+      ${escapeHtml(label)}
+    </button>
+  `).join('');
+
+  return `
+    <article class="security-card severity-${escapeHtml(f.severity)}" data-status="${escapeHtml(status)}" data-finding-id="${escapeHtml(f.id)}">
+      <header class="security-card-header">
+        <span class="security-severity-badge severity-${escapeHtml(f.severity)}">${SECURITY_SEVERITY_LABELS[f.severity] || f.severity}</span>
+        <span class="security-status-badge status-${escapeHtml(status)}">${SECURITY_STATUS_LABELS[status] || status}</span>
+        <span class="security-project-chip">${escapeHtml(f.project)}</span>
+        <span class="security-category-chip">${escapeHtml(f.category)}</span>
+      </header>
+      <h3 class="security-card-title">${escapeHtml(f.title)}</h3>
+      <p class="security-card-path"><code>${escapeHtml(f.path)}</code></p>
+      <p class="security-card-detail">${escapeHtml(f.detail)}</p>
+      <div class="security-card-actions">
+        <button class="security-suggest-btn" data-security-suggest data-finding-id="${escapeHtml(f.id)}">
+          Ver sugestão de fix
+        </button>
+        ${actionsHtml}
+      </div>
+      <footer class="security-card-footer">
+        <span>Primeiro: <strong>${escapeHtml(f.firstSeen || '—')}</strong></span>
+        <span>Último: <strong>${escapeHtml(f.lastSeen || '—')}</strong></span>
+        <span class="security-id">id: <code>${escapeHtml(f.id)}</code></span>
+      </footer>
+    </article>
+  `;
+}
+
+async function _onSecurityAction(evt) {
+  const btn = evt.currentTarget;
+  const id = btn.dataset.findingId;
+  const newStatus = btn.dataset.securityAction;
+  btn.disabled = true;
+  btn.textContent = '…';
+  try {
+    const res = await fetch('/api/security/status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id, status: newStatus })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    // Atualizar o finding local e re-render
+    const f = _securityData.findings.find(x => x.id === id);
+    if (f) f.status = newStatus;
+    renderSecurity(_securityData);
+  } catch (err) {
+    alert(`Erro ao atualizar status: ${err.message}`);
+    btn.disabled = false;
+    btn.textContent = SECURITY_STATUS_LABELS[newStatus] || newStatus;
+  }
+}
+
+async function _onSecuritySuggest(evt) {
+  const btn = evt.currentTarget;
+  const id = btn.dataset.findingId;
+  btn.disabled = true;
+  const original = btn.textContent;
+  btn.textContent = 'Buscando…';
+  try {
+    const res = await fetch(`/api/security/suggestion?id=${encodeURIComponent(id)}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    _showSuggestionModal(data);
+  } catch (err) {
+    alert(`Erro ao buscar sugestão: ${err.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = original;
+  }
+}
+
+function _showSuggestionModal(s) {
+  // Remover modal anterior se existir
+  document.getElementById('security-modal')?.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'security-modal';
+  modal.className = 'security-modal-backdrop';
+  modal.innerHTML = `
+    <div class="security-modal" role="dialog" aria-modal="true" aria-labelledby="security-modal-title">
+      <header class="security-modal-header">
+        <div>
+          <span class="security-modal-kind">${escapeHtml(s.kind || 'info')}</span>
+          <h2 id="security-modal-title">${escapeHtml(s.title || 'Sugestão')}</h2>
+        </div>
+        <button class="security-modal-close" aria-label="Fechar">×</button>
+      </header>
+      <div class="security-modal-body">
+        <div class="security-modal-explanation">${_mdlite(s.explanation || '')}</div>
+        ${s.targetPath ? `<p class="security-modal-target">Arquivo: <code>${escapeHtml(s.targetPath)}</code></p>` : ''}
+        ${s.snippet ? `
+          <div class="security-modal-block">
+            <div class="security-modal-block-header">
+              <span>Snippet</span>
+              <button class="security-copy-btn" data-copy-text>Copiar</button>
+            </div>
+            <pre class="security-modal-code"><code>${escapeHtml(s.snippet)}</code></pre>
+          </div>
+        ` : ''}
+        ${s.command ? `
+          <div class="security-modal-block">
+            <div class="security-modal-block-header">
+              <span>Comando</span>
+              <button class="security-copy-btn" data-copy-text>Copiar</button>
+            </div>
+            <pre class="security-modal-code"><code>${escapeHtml(s.command)}</code></pre>
+          </div>
+        ` : ''}
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  const close = () => modal.remove();
+  modal.querySelector('.security-modal-close').addEventListener('click', close);
+  modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+  document.addEventListener('keydown', function esc(e) {
+    if (e.key === 'Escape') { close(); document.removeEventListener('keydown', esc); }
+  });
+
+  // Copiar snippet/comando (pega o <pre> adjacente)
+  modal.querySelectorAll('[data-copy-text]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const block = btn.closest('.security-modal-block');
+      const code = block.querySelector('pre code')?.textContent || '';
+      navigator.clipboard.writeText(code).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copiado!';
+        setTimeout(() => { btn.textContent = orig; }, 1500);
+      }).catch(() => alert('Falha ao copiar'));
+    });
+  });
+}
+
+/* Resolve group via agent — dispara job e abre painel de streaming. */
+
+async function _onSecurityResolveGroup(evt) {
+  const btn = evt.currentTarget;
+  const groupId = btn.dataset.resolveGroup;
+  const original = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Iniciando…';
+
+  try {
+    const res = await fetch('/api/security/resolve', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ groupId })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    _openJobPanel(data.jobId, groupId);
+  } catch (err) {
+    alert(`Erro ao disparar: ${err.message}`);
+    btn.disabled = false;
+    btn.textContent = original;
+  }
+}
+
+function _openJobPanel(jobId, groupId) {
+  document.getElementById('security-job-panel')?.remove();
+
+  const panel = document.createElement('div');
+  panel.id = 'security-job-panel';
+  panel.className = 'security-modal-backdrop';
+  panel.innerHTML = `
+    <div class="security-modal security-job-modal" role="dialog" aria-modal="true">
+      <header class="security-modal-header">
+        <div>
+          <span class="security-modal-kind" id="job-status-kind">executando</span>
+          <h2 id="security-job-title">Resolvendo <code>${escapeHtml(groupId)}</code></h2>
+          <p class="security-job-meta" id="job-meta">job <code>${escapeHtml(jobId)}</code> · iniciando…</p>
+        </div>
+        <button class="security-modal-close" aria-label="Fechar">×</button>
+      </header>
+      <div class="security-modal-body">
+        <pre class="security-modal-code security-job-output" id="job-output">aguardando primeira linha…</pre>
+        <div class="security-job-footer" id="job-footer"></div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(panel);
+
+  const close = () => {
+    if (panel._poll) clearInterval(panel._poll);
+    panel.remove();
+  };
+  panel.querySelector('.security-modal-close').addEventListener('click', close);
+  // click fora não fecha — evita acidente durante job longo
+
+  const outputEl = panel.querySelector('#job-output');
+  const metaEl = panel.querySelector('#job-meta');
+  const kindEl = panel.querySelector('#job-status-kind');
+  const footerEl = panel.querySelector('#job-footer');
+
+  const pollOnce = async () => {
+    try {
+      const res = await fetch(`/api/security/jobs/${encodeURIComponent(jobId)}`);
+      const job = await res.json();
+      if (!res.ok) throw new Error(job.error || `HTTP ${res.status}`);
+
+      const combined = (job.stdout || '') + (job.stderr ? `\n--- stderr ---\n${job.stderr}` : '');
+      outputEl.textContent = combined || '(sem output ainda)';
+      outputEl.scrollTop = outputEl.scrollHeight;
+
+      const elapsed = job.startedAt ? Math.round(Date.now() / 1000 - job.startedAt) : 0;
+      metaEl.innerHTML = `
+        job <code>${escapeHtml(jobId)}</code> ·
+        status <strong>${escapeHtml(job.status)}</strong> ·
+        ${job.findingCount} itens ·
+        modelo <strong>${escapeHtml(job.model)}</strong> ·
+        ${elapsed}s
+      `;
+      kindEl.textContent = job.status;
+
+      if (job.status === 'done' || job.status === 'failed') {
+        clearInterval(panel._poll);
+        const okMsg = job.status === 'done'
+          ? '<span class="security-job-done">Concluído. Rodando nova varredura…</span>'
+          : `<span class="security-job-fail">Falhou (exit ${job.exitCode}${job.error ? `: ${escapeHtml(job.error)}` : ''})</span>`;
+        footerEl.innerHTML = okMsg;
+        // Rescan e refresh
+        setTimeout(() => _refreshSecurityAfterJob(), 1500);
+      }
+    } catch (err) {
+      // Silencia — volta a tentar no próximo tick
+      console.warn('poll job err:', err);
+    }
+  };
+
+  panel._poll = setInterval(pollOnce, 1500);
+  pollOnce();
+}
+
+/* Reflexão diária — dispara agente e mostra output streamado. */
+
+async function _onReflectionRun(evt) {
+  const btn = evt.currentTarget;
+  const original = btn.innerHTML;
+  btn.disabled = true;
+  btn.textContent = 'Iniciando…';
+  try {
+    const res = await fetch('/api/reflection/run', { method: 'POST' });
+    const data = await res.json();
+    if (!res.ok || !data.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    _openReflectionJobPanel(data.jobId);
+  } catch (err) {
+    alert(`Erro ao disparar reflexão: ${err.message}`);
+    btn.disabled = false;
+    btn.innerHTML = original;
+  }
+}
+
+function _openReflectionJobPanel(jobId) {
+  document.getElementById('security-job-panel')?.remove();
+
+  const panel = document.createElement('div');
+  panel.id = 'security-job-panel';
+  panel.className = 'security-modal-backdrop';
+  panel.innerHTML = `
+    <div class="security-modal security-job-modal" role="dialog" aria-modal="true">
+      <header class="security-modal-header">
+        <div>
+          <span class="security-modal-kind" id="refl-job-kind">executando</span>
+          <h2>Reflexão diária</h2>
+          <p class="security-job-meta" id="refl-job-meta">job <code>${escapeHtml(jobId)}</code> · iniciando…</p>
+        </div>
+        <button class="security-modal-close" aria-label="Fechar">×</button>
+      </header>
+      <div class="security-modal-body">
+        <pre class="security-modal-code security-job-output" id="refl-job-output">aguardando primeira linha…</pre>
+        <div class="security-job-footer" id="refl-job-footer"></div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(panel);
+
+  const close = () => {
+    if (panel._poll) clearInterval(panel._poll);
+    panel.remove();
+  };
+  panel.querySelector('.security-modal-close').addEventListener('click', close);
+
+  const outputEl = panel.querySelector('#refl-job-output');
+  const metaEl = panel.querySelector('#refl-job-meta');
+  const kindEl = panel.querySelector('#refl-job-kind');
+  const footerEl = panel.querySelector('#refl-job-footer');
+
+  const pollOnce = async () => {
+    try {
+      const res = await fetch(`/api/reflection/jobs/${encodeURIComponent(jobId)}`);
+      const job = await res.json();
+      if (!res.ok) throw new Error(job.error || `HTTP ${res.status}`);
+
+      const combined = (job.stdout || '') + (job.stderr ? `\n--- stderr ---\n${job.stderr}` : '');
+      outputEl.textContent = combined || '(sem output ainda)';
+      outputEl.scrollTop = outputEl.scrollHeight;
+
+      const elapsed = job.startedAt ? Math.round(Date.now() / 1000 - job.startedAt) : 0;
+      metaEl.innerHTML = `
+        job <code>${escapeHtml(jobId)}</code> ·
+        status <strong>${escapeHtml(job.status)}</strong> ·
+        modelo <strong>${escapeHtml(job.model)}</strong> ·
+        ${elapsed}s
+      `;
+      kindEl.textContent = job.status;
+
+      if (job.status === 'done' || job.status === 'failed') {
+        clearInterval(panel._poll);
+        const msg = job.status === 'done'
+          ? '<span class="security-job-done">Concluído. Recarregando Evolução…</span>'
+          : `<span class="security-job-fail">Falhou (exit ${job.exitCode}${job.error ? `: ${escapeHtml(job.error)}` : ''})</span>`;
+        footerEl.innerHTML = msg;
+        setTimeout(() => _refreshEvolutionAfterJob(), 1500);
+      }
+    } catch (err) {
+      console.warn('poll reflection err:', err);
+    }
+  };
+
+  panel._poll = setInterval(pollOnce, 1500);
+  pollOnce();
+}
+
+async function _refreshEvolutionAfterJob() {
+  const cacheBust = '?t=' + Date.now();
+  const [evolutionLog, skillLevels, improvementPlan, pending] = await Promise.all([
+    fetchJSON('./data/evolution-log.json' + cacheBust, FALLBACK_EVOLUTION_LOG),
+    fetchJSON('./data/skill-levels.json' + cacheBust, FALLBACK_SKILL_LEVELS),
+    fetchJSON('./data/improvement-plan.json' + cacheBust, FALLBACK_IMPROVEMENT_PLAN),
+    fetchJSON('./data/pending-reflection.json' + cacheBust, FALLBACK_PENDING)
+  ]);
+  renderEvolution(evolutionLog, skillLevels, improvementPlan, pending);
+  // Atualizar badge de notificação do nav
+  const evolucaoBtn = document.querySelector('[data-target="evolucao"]');
+  if (evolucaoBtn) {
+    if (pending && pending.status === 'pending') {
+      evolucaoBtn.classList.add('has-notification');
+    } else {
+      evolucaoBtn.classList.remove('has-notification');
+    }
+  }
+}
+
+async function _refreshSecurityAfterJob() {
+  // Dispara rescan server-side e recarrega o JSON em seguida.
+  try {
+    await fetch('/api/security/rescan', { method: 'POST' });
+  } catch {}
+  try {
+    const data = await fetchJSON('./data/security.json?t=' + Date.now(), FALLBACK_SECURITY);
+    renderSecurity(data);
+  } catch {}
+}
+
+// Markdown muito leve: negrito (**x**) e quebra de parágrafo.
+function _mdlite(text) {
+  const safe = escapeHtml(text);
+  return safe
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>')
+    .replace(/^/, '<p>')
+    .replace(/$/, '</p>');
+}
+
 /* ─── Sidebar date ─── */
 
 function renderDate() {
@@ -1644,7 +2370,7 @@ async function init() {
   if (overlay) overlay.addEventListener('click', closeSidebar);
 
   /* Load data in parallel */
-  const [skills, agents, projects, mcps, evolutionLog, skillLevels, improvementPlan, pending, aiHub] = await Promise.all([
+  const [skills, agents, projects, mcps, evolutionLog, skillLevels, improvementPlan, pending, aiHub, security, hooks] = await Promise.all([
     fetchJSON('./data/skills.json', FALLBACK_SKILLS),
     fetchJSON('./data/agents.json', FALLBACK_AGENTS),
     fetchJSON('./data/projects.json', FALLBACK_PROJECTS),
@@ -1653,7 +2379,9 @@ async function init() {
     fetchJSON('./data/skill-levels.json', FALLBACK_SKILL_LEVELS),
     fetchJSON('./data/improvement-plan.json', FALLBACK_IMPROVEMENT_PLAN),
     fetchJSON('./data/pending-reflection.json', FALLBACK_PENDING),
-    fetchJSON('./data/ai-router.json', FALLBACK_AIROUTER)
+    fetchJSON('./data/ai-router.json', FALLBACK_AIROUTER),
+    fetchJSON('./data/security.json', FALLBACK_SECURITY),
+    fetchJSON('./data/hooks.json', FALLBACK_HOOKS)
   ]);
 
   allSkills = skills;
@@ -1666,6 +2394,15 @@ async function init() {
   renderBacklog();
   renderEvolution(evolutionLog, skillLevels, improvementPlan, pending);
   renderAIHub(aiHub);
+  renderSecurity(security);
+  renderHooks(hooks);
+
+  /* Badge de notificação no nav de Security se há abertos */
+  const openSecurity = (security.findings || []).filter(f => f.status === 'open').length;
+  if (openSecurity > 0) {
+    const btn = document.querySelector('[data-target="security"]');
+    if (btn) btn.classList.add('has-notification');
+  }
 
   /* Processos — polling contínuo (mais rápido quando a aba está ativa) */
   startProcessPolling();

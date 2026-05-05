@@ -23,7 +23,7 @@
       "Seção Jogos com Werdum Fight Night",
       "Segurança: .gitignore + histórico git limpo"
     ],
-    "lastActivity": "2026-04-17"
+    "lastActivity": "2026-04-26"
   },
   {
     "id": "eat-kitchen-concierge",
@@ -49,7 +49,7 @@
       "8 idiomas",
       "Multi-step upselling flow"
     ],
-    "lastActivity": "2026-04-17"
+    "lastActivity": "2026-04-23"
   },
   {
     "id": "alugueis-bea",
@@ -58,7 +58,7 @@
     "url": null,
     "repo": null,
     "type": "Scripts",
-    "status": "maintenance",
+    "status": "active",
     "tech": [
       "Python",
       "Google Sheets API",
@@ -70,7 +70,7 @@
       "Extração de PDFs com senha",
       "Integração Google Sheets"
     ],
-    "lastActivity": "2026-04-11"
+    "lastActivity": "2026-04-23"
   },
   {
     "id": "claude-hub",
@@ -94,7 +94,7 @@
       "API /api/processes (pm2 control)",
       "Dados em JSON"
     ],
-    "lastActivity": "2026-04-17"
+    "lastActivity": "2026-04-30"
   },
   {
     "id": "magma",
@@ -117,7 +117,7 @@
       "Dark theme com accent laranja",
       "Smooth scroll via Lenis"
     ],
-    "lastActivity": "2026-04-17"
+    "lastActivity": "2026-04-27"
   },
   {
     "id": "thiago-zeni",
@@ -138,14 +138,14 @@
       "SEO completo (OG, Twitter Card, JSON-LD)",
       "robots.txt + sitemap.xml"
     ],
-    "lastActivity": "2026-04-17"
+    "lastActivity": "2026-04-27"
   },
   {
-    "id": "werdum-fight",
-    "name": "Werdum Fight",
-    "path": "/Users/pro15/Claude/werdum-fight",
+    "id": "3-contra-todos-game",
+    "name": "3 Contra Todos — Game",
+    "path": "/Users/pro15/Claude/3-contra-todos/game",
     "url": "https://werdumfight.com",
-    "repo": null,
+    "repo": "https://github.com/thiagozeni/3-contra-todos-game",
     "type": "Game",
     "status": "active",
     "tech": [
@@ -161,9 +161,43 @@
       "Cenário gameplay com vídeo de fundo",
       "SEO completo — OG, Twitter Card, JSON-LD",
       "Score e timer preservados no Continue",
-      "HUD pixel-perfect com coordenadas Figma"
+      "HUD pixel-perfect com coordenadas Figma",
+      "🛡️ Verifier hook ativo"
     ],
-    "lastActivity": "2026-04-17"
+    "lastActivity": "2026-04-30"
+  },
+  {
+    "id": "3-contra-todos-landing",
+    "name": "3 Contra Todos — Landing",
+    "path": "/Users/pro15/Claude/3-contra-todos/landing-page-promocional",
+    "url": "https://3contratodos.com",
+    "repo": null,
+    "type": "Landing",
+    "status": "active",
+    "tech": [
+      "HTML",
+      "CSS"
+    ],
+    "description": "Landing page promocional do jogo 3 Contra Todos no domínio 3contratodos.com.",
+    "highlights": [],
+    "lastActivity": "2026-04-26"
+  },
+  {
+    "id": "3-contra-todos-social",
+    "name": "3 Contra Todos — Social Media",
+    "path": "/Users/pro15/Claude/3-contra-todos/materiais-social-media",
+    "url": null,
+    "repo": null,
+    "type": "Assets",
+    "status": "active",
+    "tech": [
+      "HTML",
+      "CSS",
+      "Bash"
+    ],
+    "description": "Templates de feed/stories e scripts de export para campanhas sociais (apenas local).",
+    "highlights": [],
+    "lastActivity": "2026-04-26"
   },
   {
     "id": "ai-control-panel",
@@ -172,7 +206,7 @@
     "url": null,
     "repo": "https://github.com/thiagozeni/ai-control-panel",
     "type": "Fullstack",
-    "status": "active",
+    "status": "paused",
     "tech": [
       "Next.js",
       "TypeScript",
@@ -188,7 +222,7 @@
       "Integração com n8n workflows",
       "Next.js App Router"
     ],
-    "lastActivity": "2026-04-17"
+    "lastActivity": "2026-04-30"
   },
   {
     "id": "ai-research",
@@ -208,9 +242,10 @@
     "highlights": [
       "Pipeline: ingestion → classification → scoring → trends",
       "Dashboard Streamlit",
-      "Integração com Obsidian vault"
+      "Integração com Obsidian vault",
+      "🛡️ Verifier hook ativo"
     ],
-    "lastActivity": "2026-04-17"
+    "lastActivity": "2026-04-30"
   },
   {
     "id": "ai-router",
@@ -233,7 +268,7 @@
       "MLX local + OpenRouter + Gemini",
       "Shell scripts (~/ai-*.sh) + Python CLI"
     ],
-    "lastActivity": "2026-04-17"
+    "lastActivity": "2026-04-23"
   },
   {
     "id": "tennis-anywhere",
@@ -242,7 +277,7 @@
     "url": "https://tennis-anywhere.vercel.app",
     "repo": "https://github.com/thiagozeni/tennis-anywhere",
     "type": "PWA",
-    "status": "active",
+    "status": "paused",
     "tech": [
       "Next.js",
       "React",
@@ -258,7 +293,7 @@
       "Supabase backend",
       "Web Push"
     ],
-    "lastActivity": "2026-04-16"
+    "lastActivity": "2026-04-23"
   },
   {
     "id": "rba-consultoria",
@@ -277,8 +312,31 @@
     "highlights": [
       "Subprojetos: 50-anos (v2), landing (v1 descartada)",
       "Tagline: Criada para se recriar",
-      "Início 2026-04-15"
+      "Início 2026-04-15",
+      "🛡️ Verifier hook ativo"
     ],
-    "lastActivity": "2026-04-17"
+    "lastActivity": "2026-04-30"
+  },
+  {
+    "id": "publi",
+    "name": "Publi (Raio-X + Sistema Agência)",
+    "path": "/Users/pro15/Claude/publi",
+    "url": null,
+    "repo": null,
+    "type": "Pesquisa / Spec",
+    "status": "active",
+    "tech": [
+      "Markdown",
+      "HTML",
+      "Pesquisa de mercado"
+    ],
+    "description": "Raio-X do PubliManager (sistema dominante de gestão de agências de marketing) + esboço de novo sistema ideal para potencial substituição. Discovery + competitive analysis + design vision/system + mockups standalone.",
+    "highlights": [
+      "Raio-X de competidor (PubliManager)",
+      "Spec de novo sistema de gestão",
+      "Mockups standalone",
+      "🛡️ Verifier hook ativo"
+    ],
+    "lastActivity": "2026-05-04"
   }
 ]

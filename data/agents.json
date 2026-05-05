@@ -1051,5 +1051,19 @@
     ],
     "model": "sonnet",
     "modelNote": "claude-sonnet-4-6"
+  },
+  {
+    "id": "verifier",
+    "name": "verifier",
+    "description": "Verifier de atomic claims — dispara automaticamente via Stop hook após cada turn do builder. Decompõe a resposta em afirmações atômicas, aplica regras globais + por-projeto via OpenRouter (gpt-5-mini), e produz JSON estruturado. Não pode ser invocado por humano (improvements via verifier-rules.md). Família distinta do builder pra evitar agree-bias. Padrão IndyDevDan adaptado.",
+    "tools": [],
+    "useCases": [
+      "Validar claims do builder agent automaticamente",
+      "Aplicar regras de compliance/branding/secrets",
+      "Detectar inconsistências documentais",
+      "Sugerir novas regras (campo what_do_you_need_next_time)"
+    ],
+    "model": "gpt-5-mini",
+    "modelNote": "openai/gpt-5-mini via OpenRouter (~$3/mês). Override via VERIFIER_MODEL env var."
   }
 ]

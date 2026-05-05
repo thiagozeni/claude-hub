@@ -90,6 +90,22 @@
         AI Router
       </button>
 
+      <button class="nav-item" data-target="hooks">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 2v6a3 3 0 0 0 3 3h5" />
+          <path d="M10 8.5 12.5 11 10 13.5" />
+        </svg>
+        Hooks
+      </button>
+
+      <button class="nav-item" data-target="security">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 1.5 3 3.5v4c0 3 2.2 5.6 5 7 2.8-1.4 5-4 5-7v-4L8 1.5Z" />
+          <path d="m6 8 1.5 1.5L10.5 6.5" />
+        </svg>
+        Security
+      </button>
+
       <div class="nav-section-label">Referência</div>
 
       <button class="nav-item" data-target="cheatsheet">
@@ -135,6 +151,7 @@
         <h1 class="page-title" id="skills-title">Skills</h1>
         <p class="page-subtitle">Capacidades especializadas disponíveis nesta instância do Claude Code.</p>
       </div>
+      <input type="search" id="skills-search" class="search-input" placeholder="Buscar skills..." aria-label="Buscar skills" autocomplete="off" />
       <div class="filter-bar" id="skills-filter" role="group" aria-label="Filtrar por categoria"></div>
       <div class="cards-grid" id="skills-grid" aria-live="polite"></div>
     </section>
@@ -201,6 +218,27 @@
         <p class="page-subtitle">Arquitetura do roteador de IAs locais — uso por rota e contratempos registrados.</p>
       </div>
       <div id="airouter-content"></div>
+    </section>
+
+    <!-- HOOKS -->
+    <section id="hooks" class="page hidden" aria-labelledby="hooks-title">
+      <div class="page-header">
+        <h1 class="page-title" id="hooks-title">Hooks</h1>
+        <p class="page-subtitle">Hooks ativos no Claude Code (<code>~/.claude/settings.json</code>) — disparados em <code>PreToolUse</code>, <code>PostToolUse</code> ou <code>Stop</code>.</p>
+      </div>
+      <div class="filter-bar" id="hooks-filter" role="group" aria-label="Filtrar por evento"></div>
+      <div class="cards-grid" id="hooks-grid" aria-live="polite"></div>
+    </section>
+
+    <!-- SECURITY -->
+    <section id="security" class="page hidden" aria-labelledby="security-title">
+      <div class="page-header">
+        <h1 class="page-title" id="security-title">Security</h1>
+        <p class="page-subtitle">Varredura automática rodada pelo <code>update.py</code>. Status editável em <code>data/security.json</code>.</p>
+      </div>
+      <div id="security-summary" class="security-summary"></div>
+      <div class="filter-bar" id="security-filter" role="group" aria-label="Filtrar por status"></div>
+      <div id="security-findings" class="security-list" aria-live="polite"></div>
     </section>
 
     <!-- EVOLUÇÃO -->

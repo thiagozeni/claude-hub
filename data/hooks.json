@@ -1,0 +1,119 @@
+[
+  {
+    "id": "tsc-pre-bash",
+    "name": "tsc inline",
+    "event": "PreToolUse",
+    "matcher": "Bash",
+    "scriptPath": "(inline em settings.json)",
+    "scope": "global",
+    "category": "type-check",
+    "status": "active",
+    "description": "Roda type-check TypeScript antes de qualquer comando Bash, em projetos com tsconfig.json. Captura regressões de tipo antes do comando executar.",
+    "triggers": [
+      "Antes de qualquer Bash tool call",
+      "Apenas se tsconfig.json existe no cwd"
+    ],
+    "controls": [
+      { "label": "Comando", "value": "if [ -f tsconfig.json ]; then npx tsc --noEmit | head -20; fi" }
+    ]
+  },
+  {
+    "id": "next-cache-clear",
+    "name": "next-cache-clear.sh",
+    "event": "PreToolUse",
+    "matcher": "Bash",
+    "scriptPath": "~/.claude/hooks/next-cache-clear.sh",
+    "scope": "global",
+    "category": "cache-clear",
+    "status": "active",
+    "description": "Limpa cache do Next.js antes de comandos Bash relevantes. Evita estado inconsistente entre dev server e filesystem.",
+    "triggers": [
+      "Antes de Bash tool calls"
+    ],
+    "controls": [
+      { "label": "Editar", "value": "~/.claude/hooks/next-cache-clear.sh" }
+    ]
+  },
+  {
+    "id": "emit-tool-use",
+    "name": "emit-event tool_use",
+    "event": "PostToolUse",
+    "matcher": "Edit|Write|Bash",
+    "scriptPath": "/Users/pro15/Claude/emit-event.sh",
+    "scope": "global",
+    "category": "telemetry",
+    "status": "active",
+    "description": "Emite evento de telemetria após uso de tools de edição/escrita/bash. Feeds o pipeline de observabilidade do workspace.",
+    "triggers": [
+      "Após Edit, Write ou Bash tool calls"
+    ],
+    "controls": [
+      { "label": "Comando", "value": "emit-event.sh claude tool_use \"Tool: $CLAUDE_TOOL_NAME\"" }
+    ]
+  },
+  {
+    "id": "tsc-check",
+    "name": "tsc-check.sh",
+    "event": "PostToolUse",
+    "matcher": "Write|Edit",
+    "scriptPath": "~/.claude/hooks/tsc-check.sh",
+    "scope": "global",
+    "category": "type-check",
+    "status": "active",
+    "description": "Type-check TypeScript depois de Edit/Write em projetos com tsconfig.json. Pega erros de tipo introduzidos pela edição que acabou de acontecer.",
+    "triggers": [
+      "Após Write ou Edit tool calls",
+      "Apenas se tsconfig.json existe"
+    ],
+    "controls": [
+      { "label": "Editar", "value": "~/.claude/hooks/tsc-check.sh" }
+    ]
+  },
+  {
+    "id": "emit-task-done",
+    "name": "emit-event task_done",
+    "event": "Stop",
+    "matcher": "(any)",
+    "scriptPath": "/Users/pro15/Claude/emit-event.sh",
+    "scope": "global",
+    "category": "telemetry",
+    "status": "active",
+    "description": "Emite evento de fim de sessão Claude Code. Feeds o pipeline de observabilidade — útil pra rastrear duração e padrão de uso.",
+    "triggers": [
+      "Quando a sessão Claude Code é encerrada"
+    ],
+    "controls": [
+      { "label": "Comando", "value": "emit-event.sh claude task_done \"Sessão Claude Code encerrada\"" }
+    ]
+  },
+  {
+    "id": "verifier-stop",
+    "name": "verifier-stop.sh",
+    "event": "Stop",
+    "matcher": "(any)",
+    "scriptPath": "~/.claude/hooks/verifier-stop.sh",
+    "scope": "opt-in (per project)",
+    "category": "review",
+    "status": "active",
+    "addedAt": "2026-05-04",
+    "description": "Verifier automático — após cada turn do builder, decompõe a resposta em atomic claims, aplica regras globais + por-projeto via OpenRouter (gpt-5-mini), e produz JSON estruturado. Status fail → exit 2 + stderr feedback faz builder corrigir (max 2 iterações). Padrão IndyDevDan adaptado.",
+    "triggers": [
+      "Após cada assistant turn (Stop event)",
+      "Apenas em projetos com <projeto>/.claude/verifier-rules.md presente",
+      "Pulado se VERIFIER_SKIP=1 ou .claude/.verifier-skip existe"
+    ],
+    "controls": [
+      { "label": "Ativar em projeto", "value": "criar <projeto>/.claude/verifier-rules.md" },
+      { "label": "Pular sessão", "value": "export VERIFIER_SKIP=1" },
+      { "label": "Pular projeto", "value": "touch <projeto>/.claude/.verifier-skip" },
+      { "label": "Trocar modelo", "value": "export VERIFIER_MODEL=openai/gpt-5-nano" },
+      { "label": "Aumentar iterações", "value": "export VERIFIER_MAX_ITER=3" },
+      { "label": "Ver reports", "value": "<projeto>/.claude/verifier-reports/" },
+      { "label": "Ver log", "value": "tail ~/.claude/verifier.log" },
+      { "label": "Templates", "value": "/Users/pro15/Claude/verifier-mvp/examples/" },
+      { "label": "Reverter", "value": "cp ~/.claude/settings.json.bak-20260504-231937 ~/.claude/settings.json" }
+    ],
+    "projects": ["rba-consultoria", "ai-research", "publi", "3-contra-todos-game"],
+    "cost": "~$3/mês (gpt-5-mini OpenRouter, ~$0.004/verificação)"
+  }
+]
