@@ -1,5 +1,22 @@
 [
   {
+    "id": "log-024",
+    "date": "2026-05-04",
+    "project": "thiago-zeni",
+    "title": "Hub RBA — engagement de consultoria publicado como mini-site privado no portfólio",
+    "learned": [
+      "`noindex` no meta + bloqueio em robots.txt é o padrão correto para publicar artefatos de cliente em portfólio pessoal: acessível por link direto para o cliente, invisível para buscadores e crawlers — sem precisar de autenticação ou serviço externo",
+      "Uma página hub agregadora (/rba) com 4 seções temáticas substitui ferramentas de entrega externas (Notion, Google Drive, slides) para consultoria: versionável via git, com identidade visual controlada e URL permanente sob o domínio do consultor",
+      "Visualizações financeiras (timeline M&A com 4 fases, donut de cap table, bar charts de crescimento) em SVG/CSS puro integram melhor à identidade da página do que bibliotecas — sem build step, sem dependência, com tokens CSS compartilhados com o restante do layout",
+      "Quando um elemento de branding fixo (ZN. mark) colide com nav que aparece no scroll, `opacity: 0; pointer-events: none` via scroll listener é mais limpo que z-index battle — o elemento some visualmente mas não é removido do DOM"
+    ],
+    "highlight": "13 commits publicando o engagement RBA completo: estudo de caso Brivia (/casebrivia), análise competitiva (/concorrenciars), dossiê, diagnóstico, sim e gantt — todos agregados no hub /rba. Padrão noindex+hub é reutilizável em qualquer entrega de consultoria.",
+    "commit": "3d68626",
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
     "id": "log-023",
     "date": "2026-04-30",
     "project": "game",

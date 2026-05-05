@@ -1,14 +1,13 @@
 {
-  "date": "2026-04-30",
+  "date": "2026-05-04",
   "status": "completed",
-  "generatedAt": "2026-04-30T10:42:13.678940-03:00",
-  "completedAt": "2026-04-30T11:00:00.000000-03:00",
+  "completedAt": "2026-05-04T22:15:00-03:00",
   "completedBy": "agent",
+  "generatedAt": "2026-05-04T22:03:01.183438-03:00",
   "projectsModified": [
     "alugueis-bea",
     "claude-hub",
-    "thiago-zeni",
-    "game"
+    "thiago-zeni"
   ],
   "gitSummary": [
     {
@@ -42,9 +41,8 @@
       "hasGit": true,
       "commits": 0,
       "messages": [],
-      "uncommitted": 9,
+      "uncommitted": 8,
       "uncommittedFiles": [
-        "M db/schema.sql",
         "M run_all.py",
         "M scrapers/vila_rica.py",
         "?? _migrate_pdfs.py",
@@ -56,8 +54,8 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "cb1aa5b",
-        "message": "chore(security): complementa .gitignore com service_account.json e *.pem"
+        "hash": "d2d95eb",
+        "message": "feat(patrimonio): bucket matriculas + relação box→apto"
       }
     },
     {
@@ -65,12 +63,15 @@
       "hasGit": true,
       "commits": 0,
       "messages": [],
-      "uncommitted": 12,
+      "uncommitted": 15,
       "uncommittedFiles": [
         "M app.js",
+        "M data/pending-reflection.json",
         "M data/projects.json",
+        "M data/skills.json",
         "M index.html",
         "M scripts/daily-reflection.py",
+        "M scripts/sync-skills.py",
         "M server.py",
         "M style.css",
         "M update.py",
@@ -82,8 +83,8 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "3d5b607",
-        "message": "chore(reflection): entrada diária 2026-04-23"
+        "hash": "a9888f9",
+        "message": "chore(reflection): entrada diária 2026-04-30"
       }
     },
     {
@@ -102,8 +103,22 @@
     {
       "project": "thiago-zeni",
       "hasGit": true,
-      "commits": 0,
-      "messages": [],
+      "commits": 13,
+      "messages": [
+        "678b710 fix(sim): adiciona blueprint técnico que faltava",
+        "1b35f94 chore(rba): remove resumo executivo do hub e dos arquivos publicados",
+        "3d68626 feat(rba): publica hub central do engagement em /rba",
+        "fd49955 style(case): padroniza hero min-height em 100vh",
+        "66f2494 chore(rba): remove preview do site da RBA — cliente já publicou no domínio próprio",
+        "823b918 feat(case): publica dossiê RBA em /dossie (noindex)",
+        "06a3e24 feat(case): publica análise competitiva em /concorrenciars (noindex)",
+        "e02909e refactor(case): remove ZN. redundante da linha central do hero",
+        "c2b765b fix(case): remove regra órfã que pintava ZN. do nav de azul",
+        "56d2a60 fix(case): esconde back-link e zn-mark-fixed quando nav on-scroll aparece",
+        "b6efaa1 refactor(case): consolida ZN central + badge em linha única no hero",
+        "8b679f9 feat(case): aplica branding ZN dual-layer em /casebrivia",
+        "3d32e11 feat(case): publica estudo de caso da Brivia em /casebrivia (noindex)"
+      ],
       "uncommitted": 2,
       "uncommittedFiles": [
         "?? _cases/",
@@ -111,30 +126,21 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "d718ccb",
-        "message": "fix(domain): corrige todas referências de thiagozeni.com.br para thiagozeni.com"
+        "hash": "678b710",
+        "message": "fix(sim): adiciona blueprint técnico que faltava"
       }
     },
     {
       "project": "game",
       "hasGit": true,
-      "commits": 1,
-      "messages": [
-        "f2c7ada fix(ios-mac): detecção confiável de Mac compat + resume AudioContext"
-      ],
-      "uncommitted": 6,
-      "uncommittedFiles": [
-        "D _artes-originais/coco-hit.gif",
-        "D _artes-originais/coco-idle.gif",
-        "D _artes-originais/coco-kick.gif",
-        "D _artes-originais/coco-knockout.gif",
-        "D _artes-originais/coco-punch.gif",
-        "D _artes-originais/coco-walk.gif"
-      ],
+      "commits": 0,
+      "messages": [],
+      "uncommitted": 0,
+      "uncommittedFiles": [],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "f2c7ada",
-        "message": "fix(ios-mac): detecção confiável de Mac compat + resume AudioContext"
+        "hash": "6ffabae",
+        "message": "release(ios): 1.0.10 build 14"
       }
     },
     {
@@ -146,8 +152,8 @@
       "uncommittedFiles": [],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "5662079",
-        "message": "feat(analytics): adiciona Google Analytics (G-4YRY0BF18S)"
+        "hash": "ebc0b1d",
+        "message": "fix(real-arcade): sobe imagem ~20px (object-position 30%)"
       }
     },
     {
@@ -164,6 +170,6 @@
       }
     }
   ],
-  "suggestedTitle": "Trabalho em alugueis-bea, claude-hub, thiago-zeni, game",
+  "suggestedTitle": "Trabalho em alugueis-bea, claude-hub, thiago-zeni",
   "note": "Abra o dashboard > Evolução > Diário para completar a reflexão."
 }
