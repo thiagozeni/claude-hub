@@ -1,9 +1,9 @@
 {
-  "date": "2026-05-04",
+  "date": "2026-05-05",
   "status": "completed",
-  "completedAt": "2026-05-04T22:15:00-03:00",
+  "generatedAt": "2026-05-05T22:03:01.140189-03:00",
+  "completedAt": "2026-05-05T22:15:00.000000-03:00",
   "completedBy": "agent",
-  "generatedAt": "2026-05-04T22:03:01.183438-03:00",
   "projectsModified": [
     "alugueis-bea",
     "claude-hub",
@@ -63,17 +63,12 @@
       "hasGit": true,
       "commits": 0,
       "messages": [],
-      "uncommitted": 15,
+      "uncommitted": 10,
       "uncommittedFiles": [
-        "M app.js",
-        "M data/pending-reflection.json",
-        "M data/projects.json",
         "M data/skills.json",
-        "M index.html",
         "M scripts/daily-reflection.py",
         "M scripts/sync-skills.py",
         "M server.py",
-        "M style.css",
         "M update.py",
         "?? api/reflection.py",
         "?? api/security.py",
@@ -83,8 +78,8 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "a9888f9",
-        "message": "chore(reflection): entrada diária 2026-04-30"
+        "hash": "ad674bb",
+        "message": "feat(hooks): nova aba Hooks + verifier registrado"
       }
     },
     {
@@ -103,22 +98,8 @@
     {
       "project": "thiago-zeni",
       "hasGit": true,
-      "commits": 13,
-      "messages": [
-        "678b710 fix(sim): adiciona blueprint técnico que faltava",
-        "1b35f94 chore(rba): remove resumo executivo do hub e dos arquivos publicados",
-        "3d68626 feat(rba): publica hub central do engagement em /rba",
-        "fd49955 style(case): padroniza hero min-height em 100vh",
-        "66f2494 chore(rba): remove preview do site da RBA — cliente já publicou no domínio próprio",
-        "823b918 feat(case): publica dossiê RBA em /dossie (noindex)",
-        "06a3e24 feat(case): publica análise competitiva em /concorrenciars (noindex)",
-        "e02909e refactor(case): remove ZN. redundante da linha central do hero",
-        "c2b765b fix(case): remove regra órfã que pintava ZN. do nav de azul",
-        "56d2a60 fix(case): esconde back-link e zn-mark-fixed quando nav on-scroll aparece",
-        "b6efaa1 refactor(case): consolida ZN central + badge em linha única no hero",
-        "8b679f9 feat(case): aplica branding ZN dual-layer em /casebrivia",
-        "3d32e11 feat(case): publica estudo de caso da Brivia em /casebrivia (noindex)"
-      ],
+      "commits": 0,
+      "messages": [],
       "uncommitted": 2,
       "uncommittedFiles": [
         "?? _cases/",
@@ -139,8 +120,8 @@
       "uncommittedFiles": [],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "6ffabae",
-        "message": "release(ios): 1.0.10 build 14"
+        "hash": "35a36b7",
+        "message": "chore(verifier): adiciona regras do verifier hook"
       }
     },
     {

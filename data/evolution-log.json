@@ -1,5 +1,37 @@
 [
   {
+    "id": "log-026",
+    "date": "2026-05-05",
+    "project": "alugueis-bea",
+    "title": "Playwright para mapear extrato Ritzel/Vila Rica + RLS habilitado no Supabase",
+    "learned": [
+      "Playwright com headless:false + --disable-blink-features=AutomationControlled é a abordagem correta para exploração inicial de portais com proteção anti-bot (como Superlogica): janela visível reduz evasão de detecção e permite inspecionar o fluxo real antes de automatizar",
+      "Dois scripts de exploração paralelos (ritzel vs. vila_rica) em vez de um genérico revelam que portais diferentes têm fluxos distintos para o mesmo dado — mapear por portal antes de abstrair poupa reescritas quando a abstração prematura quebra em um dos casos",
+      "service_role key do Supabase bypassa RLS automaticamente — habilitar RLS nas tabelas não quebra os scripts Python existentes (que usam service_role), mas bloqueia acesso anônimo imediatamente sem necessidade de migrar os callers"
+    ],
+    "highlight": "Scripts de exploração Playwright para mapear o fluxo de extrato em dois portais imobiliários (Ritzel e Vila Rica), mais RLS habilitado para todas as tabelas do Supabase. O padrão explorar→mapear→automatizar evita reescritas causadas por abstração prematura entre portais.",
+    "commit": null,
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
+    "id": "log-025",
+    "date": "2026-05-05",
+    "project": "claude-hub",
+    "title": "Módulo Security — nova aba com scanner, API de findings e ciclo de vida open→resolved",
+    "learned": [
+      "Separar o scanner (security_scan.py → security.json) da API de estado (api/security.py) é o design correto para sistemas de auditoria: descoberta e triagem são operações com velocidades diferentes — o scan roda periodicamente, o status muda on-demand pelo usuário",
+      "frozenset para conjuntos fixos de status (open/acknowledged/resolved/ignored) é mais correto que lista: imutável, O(1) de lookup, e comunica que o conjunto não cresce — padrão natural para máquinas de estado finito pequenas",
+      "update.py funciona como orquestrador de toda a geração de data/*.json no claude-hub — cada nova aba exige plug no update.py primeiro, antes de qualquer código de renderização; ignorar essa ordem cria inconsistências no estado inicial do hub"
+    ],
+    "highlight": "Aba Security adicionada ao claude-hub com scanner que gera findings e API que gerencia ciclo de vida. O padrão scanner↔API↔state é reutilizável para qualquer aba de auditoria futura no hub.",
+    "commit": null,
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
     "id": "log-024",
     "date": "2026-05-04",
     "project": "thiago-zeni",
