@@ -1,5 +1,21 @@
 [
   {
+    "id": "log-027",
+    "date": "2026-05-06",
+    "project": "thiago-zeni",
+    "title": "Hub EAT+KITCHEN publicado com 4 decks de consultoria + kickoff RBA",
+    "learned": [
+      "Publicar o hub com 2 decks ativos antes dos demais estarem prontos reduz pressão de 'tudo ou nada' — o cliente acessa imediatamente enquanto os demais decks são ativados incrementalmente com commits separados, sem retrabalho no HTML do hub",
+      "Uma página por deliverable (voz-do-cliente, benchmark, expansão, kickoff) em vez de um deck monolítico permite link direto para o artefato relevante em cada reunião — e permite corrigir overflow ou visual de um deck sem tocar nos outros",
+      "thiagozeni.com funciona como infra de entrega de consultoria ao rotear clientes em subpastas (/eat/, /rba/) com noindex — o domínio pessoal viabiliza entrega profissional sem ferramenta externa (Notion, Google Drive, Pitch)"
+    ],
+    "highlight": "7 commits publicando o hub EAT+KITCHEN completo (4 decks: voz do cliente, benchmark, apresentação, expansão) e o deck de kickoff RBA. O padrão hub-por-cliente em /eat/ e /rba/ transforma o portfólio pessoal em portal de entrega de consultoria — noindex mantém privacidade sem autenticação.",
+    "commit": "ce9e4e7",
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
     "id": "log-026",
     "date": "2026-05-05",
     "project": "alugueis-bea",
