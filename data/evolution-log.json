@@ -1,5 +1,21 @@
 [
   {
+    "id": "log-028",
+    "date": "2026-05-10",
+    "project": "thiago-zeni",
+    "title": "EAT+Kitchen — site institucional e app próprio ativados no hub de consultoria",
+    "learned": [
+      "Mover cards de pipeline→ativo no hub já atualiza a percepção do cliente sem reunião intermediária — a URL do hub é a entrega; o commit é o ato de 'publicar' o milestone",
+      "Deliverables com múltiplos CTAs (app mobile + painel admin) exigem um padrão de card distinto: .card-links com múltiplos .card-link, em vez de um único link .open — a primeira versão do CSS foi ajustada no commit imediato seguinte para alinhar ao estilo do .open existente",
+      "Vercel preview URL (protegida por SSO do time) é um staging gate seguro para linkar trabalho ao vivo antes do cutover de DNS — evita expor o domínio definitivo antes da configuração estar completa"
+    ],
+    "highlight": "Site institucional e app próprio do EAT+Kitchen marcados como ativos no hub de consultoria — ambos linkados e acessíveis. Novo padrão .card-links para cards com múltiplos destinos estabilizado em 4 commits.",
+    "commit": "6aa8adb",
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
     "id": "log-027",
     "date": "2026-05-06",
     "project": "thiago-zeni",

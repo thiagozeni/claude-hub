@@ -1,13 +1,14 @@
 {
-  "date": "2026-05-06",
+  "date": "2026-05-10",
   "status": "completed",
-  "generatedAt": "2026-05-06T22:03:01.017692-03:00",
-  "completedAt": "2026-05-08T00:00:00.000000-03:00",
+  "generatedAt": "2026-05-10T22:06:36.345288-03:00",
+  "completedAt": "2026-05-11T00:00:00.000000-03:00",
   "completedBy": "agent",
   "projectsModified": [
     "alugueis-bea",
     "claude-hub",
-    "thiago-zeni"
+    "thiago-zeni",
+    "game"
   ],
   "gitSummary": [
     {
@@ -19,8 +20,8 @@
       "uncommittedFiles": [],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "1e704b8",
-        "message": "feat(footer): adiciona contato cachorradasestudios@gmail.com no footer"
+        "hash": "ac966ca",
+        "message": "feat(hero): cross-dissolve no loop, video mais visivel e ajustes visuais"
       }
     },
     {
@@ -78,8 +79,8 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "26b0cb9",
-        "message": "chore(reflection): entrada diária 2026-05-05"
+        "hash": "ffcea86",
+        "message": "chore(reflection): entrada diária 2026-05-06"
       }
     },
     {
@@ -98,15 +99,12 @@
     {
       "project": "thiago-zeni",
       "hasGit": true,
-      "commits": 7,
+      "commits": 4,
       "messages": [
-        "6fd15dd feat(rba): adiciona deck de kick-off em /kickoff + card em /rba",
-        "aa46863 fix(eat): corrige overflow do slide 12 (padrões negativos) no deck voz cliente",
-        "ce024ef fix(eat): corrige bullets do roadmap 30/60/90 no deck voz cliente",
-        "1a96743 feat(eat): ativa card 04 (apresentação de expansão) no hub",
-        "5928298 fix(eat): atualiza deck expansão · numeração de slides (XX/25) e refino visual",
-        "268b530 feat(eat): publica deck #3 (benchmark The Coffee app) e deck #4 (expansão)",
-        "ce9e4e7 feat(eat): publica hub EAT+KITCHEN em /eat com decks 1 e 2 ativos"
+        "7c72225 style(hub/eat): card-links seguem mesmo padrão do .open (sem box, seta →)",
+        "6aa8adb feat(hub/eat): app próprio (Fase 1) ativo + 2 botões pro app e admin",
+        "7b9412b feat(eat): favicon oficial do EAT em todos os decks e brand-guide",
+        "f240b86 feat(hub/eat): novo site institucional ativo + link pro preview Vercel"
       ],
       "uncommitted": 2,
       "uncommittedFiles": [
@@ -115,8 +113,8 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "6fd15dd",
-        "message": "feat(rba): adiciona deck de kick-off em /kickoff + card em /rba"
+        "hash": "7c72225",
+        "message": "style(hub/eat): card-links seguem mesmo padrão do .open (sem box, seta →)"
       }
     },
     {
@@ -124,8 +122,10 @@
       "hasGit": true,
       "commits": 0,
       "messages": [],
-      "uncommitted": 0,
-      "uncommittedFiles": [],
+      "uncommitted": 1,
+      "uncommittedFiles": [
+        "?? .claude/worktrees/"
+      ],
       "recentFiles": [],
       "latestCommit": {
         "hash": "35a36b7",
@@ -159,6 +159,6 @@
       }
     }
   ],
-  "suggestedTitle": "Trabalho em alugueis-bea, claude-hub, thiago-zeni",
+  "suggestedTitle": "Trabalho em alugueis-bea, claude-hub, thiago-zeni, game",
   "note": "Abra o dashboard > Evolução > Diário para completar a reflexão."
 }
