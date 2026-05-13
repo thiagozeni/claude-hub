@@ -1,9 +1,9 @@
 {
-  "date": "2026-05-10",
+  "date": "2026-05-12",
   "status": "completed",
-  "generatedAt": "2026-05-10T22:06:36.345288-03:00",
-  "completedAt": "2026-05-11T00:00:00.000000-03:00",
+  "completedAt": "2026-05-12T22:15:00-03:00",
   "completedBy": "agent",
+  "generatedAt": "2026-05-12T22:03:01.397417-03:00",
   "projectsModified": [
     "alugueis-bea",
     "claude-hub",
@@ -40,13 +40,29 @@
     {
       "project": "alugueis-bea",
       "hasGit": true,
-      "commits": 0,
-      "messages": [],
-      "uncommitted": 8,
+      "commits": 13,
+      "messages": [
+        "0a8c319 fix(trott): mes do boleto = mês do vencimento (era mês anterior)",
+        "7d55598 feat(dashboard): coluna status/venc/boleto na aba Despesas",
+        "78bc72c feat(trott): preenche IMOVEL_TROTT com 4 imóveis + doc setup",
+        "6ab4f96 feat(trott): download de PDF via page.pdf()",
+        "3d11a0c feat(trott): parser tab-separated da listagem + fixture real",
+        "e78c2d9 feat(trott): TrottScraper login + dump debug",
+        "27a0080 feat(cli): flag --trott em run_all.py",
+        "b848a86 feat(db): upsert_boleto_trott + upload_pdf(bucket=...)",
+        "9c675f1 feat(trott): dataclass Boleto + helpers puros (status/valor/data)",
+        "11202e2 feat(db): schema + bucket boletos para scraper Trott",
+        "65355d9 test(setup): pytest + estrutura tests/scrapers e tests/db",
+        "dd4cfe2 docs(plan): plano de implementação do scraper Trott",
+        "2b912de docs(spec): design do scraper Trott (despesas de condomínio com PDF)"
+      ],
+      "uncommitted": 10,
       "uncommittedFiles": [
-        "M run_all.py",
         "M scrapers/vila_rica.py",
         "?? _migrate_pdfs.py",
+        "?? dashboard/app_canary.py",
+        "?? dashboard/enrich_canary.py",
+        "?? dashboard/queries_canary.py",
         "?? db/rls.sql",
         "?? explorar_ritzel_extrato.py",
         "?? explorar_ritzel_extrato2.py",
@@ -55,8 +71,8 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "d2d95eb",
-        "message": "feat(patrimonio): bucket matriculas + relação box→apto"
+        "hash": "0a8c319",
+        "message": "fix(trott): mes do boleto = mês do vencimento (era mês anterior)"
       }
     },
     {
@@ -64,23 +80,30 @@
       "hasGit": true,
       "commits": 0,
       "messages": [],
-      "uncommitted": 10,
+      "uncommitted": 17,
       "uncommittedFiles": [
+        "M app.js",
+        "M data/pending-reflection.json",
         "M data/skills.json",
+        "M index.html",
         "M scripts/daily-reflection.py",
         "M scripts/sync-skills.py",
         "M server.py",
+        "M style.css",
         "M update.py",
+        "?? api/printed_clis.py",
         "?? api/reflection.py",
         "?? api/security.py",
         "?? api/security_resolve.py",
+        "?? data/printed-clis.json",
         "?? data/security.json",
-        "?? scripts/security_scan.py"
+        "?? scripts/security_scan.py",
+        "?? scripts/sync_printed_clis.py"
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "ffcea86",
-        "message": "chore(reflection): entrada diária 2026-05-06"
+        "hash": "f45fd2d",
+        "message": "chore(reflection): entrada diária 2026-05-10"
       }
     },
     {
@@ -99,13 +122,8 @@
     {
       "project": "thiago-zeni",
       "hasGit": true,
-      "commits": 4,
-      "messages": [
-        "7c72225 style(hub/eat): card-links seguem mesmo padrão do .open (sem box, seta →)",
-        "6aa8adb feat(hub/eat): app próprio (Fase 1) ativo + 2 botões pro app e admin",
-        "7b9412b feat(eat): favicon oficial do EAT em todos os decks e brand-guide",
-        "f240b86 feat(hub/eat): novo site institucional ativo + link pro preview Vercel"
-      ],
+      "commits": 0,
+      "messages": [],
       "uncommitted": 2,
       "uncommittedFiles": [
         "?? _cases/",
@@ -113,8 +131,8 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "7c72225",
-        "message": "style(hub/eat): card-links seguem mesmo padrão do .open (sem box, seta →)"
+        "hash": "5dafdde",
+        "message": "fix(eat/decks): tracking positivo (.04em) no título da capa pra casar com o logo"
       }
     },
     {

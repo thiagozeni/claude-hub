@@ -1,5 +1,21 @@
 [
   {
+    "id": "log-029",
+    "date": "2026-05-12",
+    "project": "alugueis-bea",
+    "title": "Scraper Trott — parser TSV, PDF via Playwright e inversão da convenção de mês",
+    "learned": [
+      "A convenção de 'competência condominial' (mês anterior ao vencimento) é semânticamente correta mas cria UX contra-intuitiva: usuário busca maio e não vê boletos com vencimento em maio — quando UX conflita com semântica de domínio, UX vence; a migração forçou renomear a função e atualizar 12 testes + 9 registros no Supabase",
+      "O portal Trott exporta a listagem em TSV de 6 colunas (Nr. Doc, Status, Condomínio, Unidades, Vencimento, Valor) — usar split('\\t') em vez de regex ou BeautifulSoup é o parser correto para TSV; identificar o formato exato antes de escrever o parser evita reescritas",
+      "page.pdf() do Playwright baixa o PDF renderizado do portal sem precisar interceptar o link de download — mais confiável do que simular clique em <a> com href dinâmico, especialmente quando o link exige sessão autenticada"
+    ],
+    "highlight": "Scraper Trott construído do zero em 13 commits: spec → schema → dataclass → parser TSV com fixtures reais → login Playwright → download PDF → upsert Supabase → fix de mês → coluna no dashboard. A inversão da convenção de mês (competência→vencimento) foi o único retrocesso, resolvido com migração cirúrgica.",
+    "commit": "0a8c319",
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
     "id": "log-028",
     "date": "2026-05-10",
     "project": "thiago-zeni",
