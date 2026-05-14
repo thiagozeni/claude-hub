@@ -1,9 +1,9 @@
 {
-  "date": "2026-05-12",
+  "date": "2026-05-13",
   "status": "completed",
-  "completedAt": "2026-05-12T22:15:00-03:00",
+  "generatedAt": "2026-05-13T22:03:01.856037-03:00",
+  "completedAt": "2026-05-14T00:00:00.000000-03:00",
   "completedBy": "agent",
-  "generatedAt": "2026-05-12T22:03:01.397417-03:00",
   "projectsModified": [
     "alugueis-bea",
     "claude-hub",
@@ -40,22 +40,8 @@
     {
       "project": "alugueis-bea",
       "hasGit": true,
-      "commits": 13,
-      "messages": [
-        "0a8c319 fix(trott): mes do boleto = mês do vencimento (era mês anterior)",
-        "7d55598 feat(dashboard): coluna status/venc/boleto na aba Despesas",
-        "78bc72c feat(trott): preenche IMOVEL_TROTT com 4 imóveis + doc setup",
-        "6ab4f96 feat(trott): download de PDF via page.pdf()",
-        "3d11a0c feat(trott): parser tab-separated da listagem + fixture real",
-        "e78c2d9 feat(trott): TrottScraper login + dump debug",
-        "27a0080 feat(cli): flag --trott em run_all.py",
-        "b848a86 feat(db): upsert_boleto_trott + upload_pdf(bucket=...)",
-        "9c675f1 feat(trott): dataclass Boleto + helpers puros (status/valor/data)",
-        "11202e2 feat(db): schema + bucket boletos para scraper Trott",
-        "65355d9 test(setup): pytest + estrutura tests/scrapers e tests/db",
-        "dd4cfe2 docs(plan): plano de implementação do scraper Trott",
-        "2b912de docs(spec): design do scraper Trott (despesas de condomínio com PDF)"
-      ],
+      "commits": 0,
+      "messages": [],
       "uncommitted": 10,
       "uncommittedFiles": [
         "M scrapers/vila_rica.py",
@@ -80,10 +66,9 @@
       "hasGit": true,
       "commits": 0,
       "messages": [],
-      "uncommitted": 17,
+      "uncommitted": 16,
       "uncommittedFiles": [
         "M app.js",
-        "M data/pending-reflection.json",
         "M data/skills.json",
         "M index.html",
         "M scripts/daily-reflection.py",
@@ -102,8 +87,8 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "f45fd2d",
-        "message": "chore(reflection): entrada diária 2026-05-10"
+        "hash": "218579f",
+        "message": "chore(reflection): entrada diária 2026-05-12"
       }
     },
     {

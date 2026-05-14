@@ -1,5 +1,37 @@
 [
   {
+    "id": "log-031",
+    "date": "2026-05-13",
+    "project": "claude-hub",
+    "title": "Printed CLIs tracker + API de reflexão — hub evolui de launcher para portfólio de artefatos",
+    "learned": [
+      "Separar 'skills disponíveis' (inventário) de 'CLIs gerados' (artefatos construídos) é uma distinção conceitual nova no hub: `data/skills.json` é o que posso fazer, `data/printed-clis.json` é o que já construí — a segunda categoria transforma o hub em portfólio auditável de projetos de automação, não apenas um lançador de ferramentas",
+      "`api/reflection.py` fecha o ciclo reflexivo que antes dependia de interação manual: com endpoint de API, o daily-reflection.py pode gravar E recuperar reflexões programaticamente, abrindo caminho para análise de padrões sem precisar ler arquivos JSON diretamente",
+      "Manter a API de printed CLIs estritamente read-only em runtime (sem nenhum endpoint de escrita) é uma decisão de integridade: o catálogo só muda quando o sync script detecta mudança real no ambiente, evitando que o hub 'minta' sobre o que foi construído por falta de sincronização"
+    ],
+    "highlight": "Duas novas APIs adicionadas ao hub: printed CLIs (catálogo de ferramentas já construídas via Printing Press) e reflexão (fechando o ciclo do diário de evolução). O hub passa a distinguir o que pode fazer do que já construiu.",
+    "commit": null,
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
+    "id": "log-030",
+    "date": "2026-05-13",
+    "project": "alugueis-bea",
+    "title": "Canary dashboard — aba Diff e queries de shape idêntico para validar migração Python→Go CLI",
+    "learned": [
+      "Queries canary com DataFrame de shape idêntico à produção permitem reaproveitar 100% do render do `app.py` sem modificações — o canary vira uma lente, não uma bifurcação; qualquer divergência de UI seria automaticamente sinal de bug nas queries, não diferença intencional",
+      "Aba Diff integrada no próprio dashboard transforma validação passiva (comparar manualmente no terminal) em diagnóstico ativo: discrepâncias ficam visíveis durante uso normal, acelerando a decisão de cutover sem sessões extras de análise",
+      "A derivação explícita de `confirmado_conta` como `status='Pago'` no schema Go CLI revela um contrato implícito do Python que nunca foi documentado — o canary funciona como ferramenta de especificação retroativa, forçando contratos tácitos a se tornarem código explícito antes do cutover"
+    ],
+    "highlight": "Dashboard canary em paralelo na porta 8502 compara receitas Python vs Go CLI lado a lado com aba Diff integrada. O padrão de queries com shape idêntico elimina forking de UI e expõe divergências de schema antes que cheguem à produção.",
+    "commit": null,
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
     "id": "log-029",
     "date": "2026-05-12",
     "project": "alugueis-bea",
