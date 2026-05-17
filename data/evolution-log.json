@@ -1,5 +1,21 @@
 [
   {
+    "id": "log-032",
+    "date": "2026-05-16",
+    "project": "alugueis-bea",
+    "title": "Vila Rica — login estabilizado, mapa de boletos extras e migração de nomes de PDFs",
+    "learned": [
+      "wait_until='networkidle' é instável para SPAs que fazem chamadas de API após a navegação inicial — trocar para wait_until='load' + asyncio.sleep(3) elimina race conditions onde o formulário de login ainda não existe no DOM quando o Playwright tenta interagir; adicionar screenshot automático em caso de falha transforma erros intermitentes em diagnósticos concretos",
+      "Boletos de chamada extra do portal Vila Rica usam par (keyword_endereço, unidade) diferente dos recibos regulares de condomínio — criar BOLETO_PARA_IMOVEL como dict de lookup explícito com comentários 'como completar' é mais rastreável do que tentar unificar ambos os formatos no mesmo parser; o dict vira contrato de manutenção que novos imóveis preenchem incrementalmente",
+      "Nomes de arquivo gerados automaticamente pelo portal (com acentos URL-encoded: 'donna-ang-lica', 'it-lia') quebram sort e busca no Supabase Storage — padronizar para {imob}_{imovel}_{AAAA}-{MM}.pdf via script único descartável com RENAMES hardcoded é mais seguro que corrigir na geração: o script funciona como audit trail explícito da migração, e download→upload→delete é a sequência correta (sem rename nativo no Supabase Storage)"
+    ],
+    "highlight": "Três frentes de hardening no scraper Vila Rica: login mais robusto contra race conditions de SPA, tabela de lookup para boletos extras com par (endereço, unidade), e migração pontual de 11 PDFs para nomenclatura canônica no Supabase Storage.",
+    "commit": null,
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
     "id": "log-031",
     "date": "2026-05-13",
     "project": "claude-hub",
