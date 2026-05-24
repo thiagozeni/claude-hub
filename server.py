@@ -15,11 +15,13 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, urlparse
 
-from api import processes
+from api import processes, security, security_resolve, reflection, printed_clis
 
 ROOT = Path(__file__).parent
 HOST = "127.0.0.1"
-PORT = 8080
+# 8090: evita conflito com o UniFi Network Controller, que usa 8080 (device
+# inform) junto de 8443/8880/6789. Fonte única da porta — processes.py lê daqui.
+PORT = 8090
 
 ALLOWED_ACTIONS: frozenset[str] = frozenset({"start", "stop", "restart"})
 
@@ -92,11 +94,138 @@ class DashboardHandler(SimpleHTTPRequestHandler):
                 self._send_error_json(str(exc), HTTPStatus.BAD_REQUEST)
             return
 
+        # GET /api/security/suggestion?id=<finding-id>
+        if path == "/api/security/suggestion":
+            finding_id = (query.get("id", [""])[0] or "").strip()
+            if not finding_id:
+                self._send_error_json("id é obrigatório", HTTPStatus.BAD_REQUEST)
+                return
+            try:
+                self._send_json(security.suggestion_for(finding_id))
+            except security.SecurityError as exc:
+                self._send_error_json(str(exc), HTTPStatus.BAD_REQUEST)
+            return
+
+        # GET /api/security/groups
+        if path == "/api/security/groups":
+            try:
+                self._send_json({"groups": security_resolve.list_groups()})
+            except security_resolve.ResolveError as exc:
+                self._send_error_json(str(exc), HTTPStatus.BAD_REQUEST)
+            return
+
+        # GET /api/security/jobs/<jobId>
+        parts = path.strip("/").split("/")
+        if len(parts) == 4 and parts[:3] == ["api", "security", "jobs"]:
+            try:
+                self._send_json(security_resolve.get_job(parts[3]))
+            except security_resolve.ResolveError as exc:
+                self._send_error_json(str(exc), HTTPStatus.NOT_FOUND)
+            return
+
+        # GET /api/reflection/jobs/<jobId>
+        if len(parts) == 4 and parts[:3] == ["api", "reflection", "jobs"]:
+            try:
+                self._send_json(reflection.get_job(parts[3]))
+            except reflection.ReflectionError as exc:
+                self._send_error_json(str(exc), HTTPStatus.NOT_FOUND)
+            return
+
+        # GET /api/printed-clis
+        if path == "/api/printed-clis":
+            try:
+                self._send_json(printed_clis.list_clis())
+            except printed_clis.PrintedClisError as exc:
+                self._send_error_json(str(exc), HTTPStatus.INTERNAL_SERVER_ERROR)
+            return
+
+        # GET /api/printed-clis/<name>
+        if len(parts) == 3 and parts[0] == "api" and parts[1] == "printed-clis":
+            cli = printed_clis.get_cli(parts[2])
+            if cli is None:
+                self._send_error_json("CLI não encontrada", HTTPStatus.NOT_FOUND)
+                return
+            self._send_json(cli)
+            return
+
         self._send_error_json("rota não encontrada", HTTPStatus.NOT_FOUND)
 
     def _route_api_post(self, path: str) -> None:
-        # POST /api/processes/<name>/<action>
         parts = path.strip("/").split("/")
+
+        # POST /api/reflection/run — dispara reflexão diária via agente
+        if path == "/api/reflection/run":
+            # body pode ser vazio; consume se existir
+            length = int(self.headers.get("Content-Length", 0))
+            if length:
+                self.rfile.read(length)
+            try:
+                job_id = reflection.start_reflection()
+                self._send_json({"ok": True, "jobId": job_id})
+            except reflection.ReflectionError as exc:
+                self._send_error_json(str(exc), HTTPStatus.BAD_REQUEST)
+            return
+
+        # POST /api/security/rescan — re-executa o scan e regrava security.json
+        if path == "/api/security/rescan":
+            try:
+                import sys as _sys
+                _scripts = str(ROOT / "scripts")
+                if _scripts not in _sys.path:
+                    _sys.path.insert(0, _scripts)
+                import security_scan  # type: ignore
+                payload = security_scan.run_scan(ROOT / "data" / "security.json")
+                self._send_json({"ok": True, "summary": payload["summary"], "total": sum(payload["summary"].values())})
+            except Exception as exc:  # noqa: BLE001
+                self._send_error_json(f"rescan falhou: {exc}", HTTPStatus.INTERNAL_SERVER_ERROR)
+            return
+
+        # POST /api/security/resolve  (body: {groupId})
+        if path == "/api/security/resolve":
+            length = int(self.headers.get("Content-Length", 0))
+            if length <= 0 or length > 4096:
+                self._send_error_json("body inválido", HTTPStatus.BAD_REQUEST)
+                return
+            try:
+                body = json.loads(self.rfile.read(length).decode("utf-8"))
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                self._send_error_json("JSON inválido", HTTPStatus.BAD_REQUEST)
+                return
+            group_id = (body.get("groupId") or "").strip()
+            if not group_id:
+                self._send_error_json("groupId é obrigatório", HTTPStatus.BAD_REQUEST)
+                return
+            try:
+                job_id = security_resolve.start_resolve(group_id)
+                self._send_json({"ok": True, "jobId": job_id})
+            except security_resolve.ResolveError as exc:
+                self._send_error_json(str(exc), HTTPStatus.BAD_REQUEST)
+            return
+
+        # POST /api/security/status  (body: {id, status})
+        if path == "/api/security/status":
+            length = int(self.headers.get("Content-Length", 0))
+            if length <= 0 or length > 4096:
+                self._send_error_json("body inválido", HTTPStatus.BAD_REQUEST)
+                return
+            try:
+                body = json.loads(self.rfile.read(length).decode("utf-8"))
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                self._send_error_json("JSON inválido", HTTPStatus.BAD_REQUEST)
+                return
+            finding_id = (body.get("id") or "").strip()
+            new_status = (body.get("status") or "").strip()
+            if not finding_id or not new_status:
+                self._send_error_json("id e status são obrigatórios", HTTPStatus.BAD_REQUEST)
+                return
+            try:
+                updated = security.update_status(finding_id, new_status)
+                self._send_json({"ok": True, "finding": updated})
+            except security.SecurityError as exc:
+                self._send_error_json(str(exc), HTTPStatus.BAD_REQUEST)
+            return
+
+        # POST /api/processes/<name>/<action>
         if len(parts) != 4 or parts[0] != "api" or parts[1] != "processes":
             self._send_error_json("rota não encontrada", HTTPStatus.NOT_FOUND)
             return

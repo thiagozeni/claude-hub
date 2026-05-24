@@ -25,7 +25,9 @@ PROJECTS = [
     "/Users/pro15/Claude/claude-hub",
     "/Users/pro15/Claude/magma",
     "/Users/pro15/Claude/thiago-zeni",
-    "/Users/pro15/Claude/werdum-fight",
+    "/Users/pro15/Claude/3-contra-todos/game",
+    "/Users/pro15/Claude/3-contra-todos/landing-page-promocional",
+    "/Users/pro15/Claude/3-contra-todos/materiais-social-media",
 ]
 
 DASHBOARD_DIR = "/Users/pro15/Claude/claude-hub"
@@ -160,7 +162,7 @@ def main():
             "date": today,
             "status": "completed",
             "note": f"Nenhuma atividade de git registrada em {today}.",
-            "generatedAt": datetime.now().isoformat()
+            "generatedAt": datetime.now().astimezone().isoformat()
         }
         with open(PENDING_FILE, "w") as f:
             json.dump(pending, f, ensure_ascii=False, indent=2)
@@ -170,8 +172,9 @@ def main():
     pending = {
         "date": today,
         "status": "pending",
-        "generatedAt": datetime.now().isoformat(),
+        "generatedAt": datetime.now().astimezone().isoformat(),
         "projectsModified": projects_modified,
+
         "gitSummary": git_summary,
         "suggestedTitle": f"Trabalho em {', '.join(projects_modified)}",
         "note": "Abra o dashboard > Evolução > Diário para completar a reflexão."

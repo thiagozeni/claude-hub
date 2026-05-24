@@ -51,7 +51,7 @@ const FALLBACK_PROJECTS = [
   { id: "cachorradas-estudios", name: "Cachorradas Estudios", path: "/Users/pro15/Claude/cachorradas-estudios", url: "https://thiagozeni.github.io/cachorradas-estudios", repo: "https://github.com/thiagozeni/cachorradas-estudios", type: "Site Estático", status: "active", tech: ["HTML", "CSS", "JavaScript", "Python", "GitHub Actions", "YouTube Data API v3"], description: "Site do canal YouTube @CachorradasEstudios com atualização automática diária de stats e vídeos via GitHub Actions às 08h BRT.", highlights: ["GitHub Pages", "Auto-update diário 08h BRT", "Séries: GDV, Metallica Slayer, E SE???"], lastActivity: "2026-03-11" },
   { id: "eat-kitchen-concierge", name: "EAT Kitchen Concierge", path: "/Users/pro15/Claude/eat-kitchen-concierge", url: null, repo: null, type: "Fullstack", status: "active", tech: ["React 19", "Vite", "TypeScript", "Tailwind v4", "Express", "Gemini API", "lucide-react", "motion"], description: "Concierge gastronômico com IA para o restaurante EAT Kitchen — recomenda pratos com streaming de respostas e suporte a múltiplos idiomas.", highlights: ["SSE streaming", "8 idiomas", "Multi-step upselling flow"], lastActivity: "2026-03-11" },
   { id: "alugueis-bea", name: "Aluguéis Bea", path: "/Users/pro15/Claude/alugueis-bea", url: null, repo: null, type: "Scripts", status: "maintenance", tech: ["Python", "Google Sheets API", "Apps Script", "openpyxl"], description: "Controle de aluguéis com extração automática de PDFs protegidos por senha e preenchimento de planilha Google Sheets.", highlights: ["Extração de PDFs com senha", "Integração Google Sheets"], lastActivity: "2026-03-01" },
-  { id: "claude-hub", name: "Claude Hub", path: "/Users/pro15/Claude/claude-hub", url: null, repo: "https://github.com/thiagozeni/claude-hub", type: "Site Estático", status: "active", tech: ["Python", "HTML", "CSS", "JavaScript vanilla", "launchd"], description: "Central de informações sobre capacidades do Claude Code: skills, sub-agents, projetos, MCPs, cheatsheet e backlog. Servido em localhost:8080 via LaunchAgent.", highlights: ["Uso interno", "LaunchAgent (com.pro15.claude-hub)", "API /api/processes (pm2 control)"], lastActivity: "2026-04-17" },
+  { id: "claude-hub", name: "Claude Hub", path: "/Users/pro15/Claude/claude-hub", url: null, repo: "https://github.com/thiagozeni/claude-hub", type: "Site Estático", status: "active", tech: ["Python", "HTML", "CSS", "JavaScript vanilla", "launchd"], description: "Central de informações sobre capacidades do Claude Code: skills, sub-agents, projetos, MCPs, cheatsheet e backlog. Servido em localhost:8090 via LaunchAgent.", highlights: ["Uso interno", "LaunchAgent (com.pro15.claude-hub)", "API /api/processes (pm2 control)"], lastActivity: "2026-04-17" },
   { id: "magma", name: "Magma", path: "/Users/pro15/Claude/magma", url: null, repo: null, type: "Site Estático", status: "active", tech: ["HTML", "CSS", "JavaScript"], description: "Site histórico da banda Magma (Nova Hamburgo/RS, 2001–2025) — discografia, fotos, vídeos e memória da trajetória da banda.", highlights: ["Site comemorativo", "Sem dependências externas"], lastActivity: "2026-03-15" },
   { id: "thiago-zeni", name: "Thiago Zeni", path: "/Users/pro15/Claude/thiago-zeni", url: null, repo: null, type: "Site Estático", status: "active", tech: ["HTML", "CSS", "JavaScript"], description: "Site pessoal de Thiago Zeni — Marketing Digital & Liderança Executiva.", highlights: ["Site pessoal", "Sem dependências externas"], lastActivity: "2026-03-15" },
   { id: "3-contra-todos-game", name: "3 Contra Todos — Game", path: "/Users/pro15/Claude/3-contra-todos/game", url: "https://werdumfight.com", repo: "https://github.com/thiagozeni/3-contra-todos-game", type: "Game", status: "active", tech: ["TypeScript", "Vite", "Phaser 3", "Capacitor"], description: "Arena Beat'em Up inspirado em Streets of Rage e Final Fight, desenvolvido com Phaser 3. Web + iOS + Android.", highlights: ["Arena Beat'em Up", "Phaser 3", "App Store + Google Play"], lastActivity: "2026-04-26" },
@@ -207,13 +207,14 @@ function copyToClipboard(text, el) {
 
 /* ─── Navigation ─── */
 
-const SECTIONS = ['skills', 'agents', 'processos', 'projects', 'mcps', 'airouter', 'hooks', 'security', 'cheatsheet', 'backlog', 'evolucao'];
+const SECTIONS = ['skills', 'agents', 'processos', 'projects', 'mcps', 'printedclis', 'airouter', 'hooks', 'security', 'cheatsheet', 'backlog', 'evolucao'];
 const SECTION_LABELS = {
   skills: 'Skills',
   agents: 'Sub-Agents',
   processos: 'Processos',
   projects: 'Projetos',
   mcps: 'MCPs / Tools',
+  printedclis: 'Printed CLIs',
   airouter: 'AI Router',
   hooks: 'Hooks',
   security: 'Security',
@@ -903,6 +904,82 @@ function renderHooks(hooks) {
   if (filtered.length === 0) {
     grid.innerHTML = '<p class="empty-state">Nenhum hook neste filtro.</p>';
   }
+}
+
+/* ─── Printed CLIs ─── */
+
+function renderPrintedClis(payload) {
+  const toolbar = document.getElementById('printedclis-toolbar');
+  const grid = document.getElementById('printedclis-grid');
+  if (!toolbar || !grid) return;
+
+  const clis = (payload && payload.clis) || [];
+  const press = (payload && payload.press_version) || null;
+  const generatedAt = (payload && payload.generated_at) || null;
+  const libraryPath = (payload && payload.library_path) || '~/printing-press/library';
+
+  toolbar.innerHTML = `
+    <div class="printed-clis-meta">
+      <span class="meta-pill ${press ? 'meta-pill-ok' : 'meta-pill-warn'}">${press ? 'press ' + escapeHtml(press) : 'binary não detectado'}</span>
+      <span class="meta-pill">${clis.length} CLI${clis.length === 1 ? '' : 's'}</span>
+      ${generatedAt ? `<span class="meta-pill meta-pill-mono">sync: ${escapeHtml(generatedAt)}</span>` : ''}
+      <span class="meta-pill meta-pill-mono">${escapeHtml(libraryPath)}</span>
+    </div>
+  `;
+
+  grid.innerHTML = '';
+
+  if (clis.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state-card">
+        <h3>Nenhuma CLI impressa ainda</h3>
+        <p>Para imprimir a primeira CLI, rode no Claude Code:</p>
+        <pre><code>/printing-press &lt;app-name&gt;</code></pre>
+        <p class="empty-state-hint">A library será populada em <code>${escapeHtml(libraryPath)}</code> e refletida aqui após <code>./start.sh</code> (que roda <code>sync_printed_clis.py</code>).</p>
+      </div>
+    `;
+    return;
+  }
+
+  clis.forEach(cli => {
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const scorecard = cli.scorecard || {};
+    const scoreBadge = scorecard.total != null
+      ? `<span class="score-badge score-${(scorecard.grade || '').toLowerCase()}">${scorecard.total}/100 ${scorecard.grade ? '· ' + scorecard.grade : ''}</span>`
+      : '';
+
+    const mcpBadge = cli.has_mcp ? '<span class="badge badge-info">MCP server</span>' : '';
+    const authBadge = cli.auth_type ? `<span class="badge badge-neutral">${escapeHtml(cli.auth_type)}</span>` : '';
+
+    const commandsHTML = (cli.commands || []).length > 0
+      ? `<div class="card-section">
+           <span class="card-section-label">Comandos:</span>
+           <div class="cmd-chips">${cli.commands.map(c => `<code class="cmd-chip">${escapeHtml(c)}</code>`).join('')}</div>
+         </div>`
+      : '';
+
+    const noiHTML = cli.noi
+      ? `<div class="card-section noi-block"><em>${escapeHtml(cli.noi)}</em></div>`
+      : '';
+
+    card.innerHTML = `
+      <div class="card-header">
+        <h3 class="card-title">${escapeHtml(cli.cli_name || cli.name)}</h3>
+        ${scoreBadge}
+      </div>
+      <p class="card-description">API: <strong>${escapeHtml(cli.api || cli.name)}</strong>${cli.version ? ' · v' + escapeHtml(cli.version) : ''}</p>
+      ${noiHTML}
+      ${commandsHTML}
+      <div class="card-footer">
+        ${mcpBadge}
+        ${authBadge}
+        ${cli.spec_source ? `<span class="badge badge-neutral">${escapeHtml(cli.spec_source)}</span>` : ''}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
 }
 
 /* ─── Cheatsheet ─── */
@@ -2370,7 +2447,8 @@ async function init() {
   if (overlay) overlay.addEventListener('click', closeSidebar);
 
   /* Load data in parallel */
-  const [skills, agents, projects, mcps, evolutionLog, skillLevels, improvementPlan, pending, aiHub, security, hooks] = await Promise.all([
+  const FALLBACK_PRINTED_CLIS = { generated_at: null, library_path: "~/printing-press/library", press_version: null, clis: [] };
+  const [skills, agents, projects, mcps, evolutionLog, skillLevels, improvementPlan, pending, aiHub, security, hooks, printedClis] = await Promise.all([
     fetchJSON('./data/skills.json', FALLBACK_SKILLS),
     fetchJSON('./data/agents.json', FALLBACK_AGENTS),
     fetchJSON('./data/projects.json', FALLBACK_PROJECTS),
@@ -2381,7 +2459,8 @@ async function init() {
     fetchJSON('./data/pending-reflection.json', FALLBACK_PENDING),
     fetchJSON('./data/ai-router.json', FALLBACK_AIROUTER),
     fetchJSON('./data/security.json', FALLBACK_SECURITY),
-    fetchJSON('./data/hooks.json', FALLBACK_HOOKS)
+    fetchJSON('./data/hooks.json', FALLBACK_HOOKS),
+    fetchJSON('./data/printed-clis.json', FALLBACK_PRINTED_CLIS)
   ]);
 
   allSkills = skills;
@@ -2396,6 +2475,7 @@ async function init() {
   renderAIHub(aiHub);
   renderSecurity(security);
   renderHooks(hooks);
+  renderPrintedClis(printedClis);
 
   /* Badge de notificação no nav de Security se há abertos */
   const openSecurity = (security.findings || []).filter(f => f.status === 'open').length;

@@ -23,14 +23,39 @@
       "Seção Jogos com Werdum Fight Night",
       "Segurança: .gitignore + histórico git limpo"
     ],
-    "lastActivity": "2026-04-26"
+    "lastActivity": "2026-05-07"
+  },
+  {
+    "id": "eat-kitchen",
+    "name": "EAT Kitchen",
+    "path": "/Users/pro15/Claude/eat-kitchen",
+    "url": "https://eat-kitchen-app.vercel.app",
+    "repo": "https://github.com/thiagozeni/eat-kitchen-app",
+    "type": "Fullstack",
+    "status": "active",
+    "tech": [
+      "Next.js 16",
+      "Supabase",
+      "Zustand",
+      "TypeScript",
+      "Tailwind",
+      "Vercel"
+    ],
+    "description": "App de pedido digital EAT+Kitchen — Next.js 16 + Supabase + Zustand. Contém subprojetos: food-porn (geração de vídeos via IA), eat-kitchen-concierge (AI Concierge), brand-guide, pesquisa e website.",
+    "highlights": [
+      "Deploy Vercel",
+      "Admin redirect pós-login",
+      "Auth + RLS Supabase",
+      "Subprojetos: food-porn, concierge, website"
+    ],
+    "lastActivity": "2026-05-22"
   },
   {
     "id": "eat-kitchen-concierge",
     "name": "EAT Kitchen Concierge",
-    "path": "/Users/pro15/Claude/eat-kitchen-concierge",
+    "path": "/Users/pro15/Claude/eat-kitchen/eat-kitchen-concierge",
     "url": null,
-    "repo": null,
+    "repo": "https://github.com/thiagozeni/eat-kitchen-concierge",
     "type": "Fullstack",
     "status": "active",
     "tech": [
@@ -43,13 +68,36 @@
       "lucide-react",
       "motion"
     ],
-    "description": "Concierge gastronômico com IA para o restaurante EAT Kitchen — recomenda pratos com streaming de respostas e suporte a múltiplos idiomas.",
+    "description": "Concierge gastronômico com IA para o restaurante EAT Kitchen — recomenda pratos com streaming de respostas e suporte a múltiplos idiomas. Repo git aninhado dentro de eat-kitchen (remote próprio).",
     "highlights": [
       "SSE streaming",
       "8 idiomas",
-      "Multi-step upselling flow"
+      "Multi-step upselling flow",
+      "Repo git aninhado em eat-kitchen/"
     ],
-    "lastActivity": "2026-04-23"
+    "lastActivity": "2026-05-22"
+  },
+  {
+    "id": "eat-kitchen-food-porn",
+    "name": "EAT Kitchen — Food Porn",
+    "path": "/Users/pro15/Claude/eat-kitchen/food-porn",
+    "url": null,
+    "repo": null,
+    "type": "Experimento IA",
+    "status": "active",
+    "tech": [
+      "Seedance",
+      "Kling",
+      "Veo",
+      "Grok",
+      "Higgsfield"
+    ],
+    "description": "Experimento de geração de vídeos 'food porn' via IA para campanhas do EAT+Kitchen. Fase 1A concluída.",
+    "highlights": [
+      "Fase 1A concluída",
+      "Multi-modelo: Seedance / Kling / Veo / Grok"
+    ],
+    "lastActivity": "2026-05-07"
   },
   {
     "id": "alugueis-bea",
@@ -70,7 +118,7 @@
       "Extração de PDFs com senha",
       "Integração Google Sheets"
     ],
-    "lastActivity": "2026-04-23"
+    "lastActivity": "2026-05-22"
   },
   {
     "id": "claude-hub",
@@ -87,14 +135,14 @@
       "JavaScript vanilla",
       "launchd"
     ],
-    "description": "Central de informações sobre capacidades do Claude Code: skills, sub-agents, projetos, MCPs, cheatsheet e backlog. Servido em localhost:8080 via LaunchAgent.",
+    "description": "Central de informações sobre capacidades do Claude Code: skills, sub-agents, projetos, MCPs, cheatsheet e backlog. Servido em localhost:8090 via LaunchAgent.",
     "highlights": [
       "Uso interno",
       "LaunchAgent (com.pro15.claude-hub)",
       "API /api/processes (pm2 control)",
       "Dados em JSON"
     ],
-    "lastActivity": "2026-04-30"
+    "lastActivity": "2026-05-23"
   },
   {
     "id": "magma",
@@ -117,7 +165,7 @@
       "Dark theme com accent laranja",
       "Smooth scroll via Lenis"
     ],
-    "lastActivity": "2026-04-27"
+    "lastActivity": "2026-05-18"
   },
   {
     "id": "thiago-zeni",
@@ -138,7 +186,7 @@
       "SEO completo (OG, Twitter Card, JSON-LD)",
       "robots.txt + sitemap.xml"
     ],
-    "lastActivity": "2026-04-27"
+    "lastActivity": "2026-05-10"
   },
   {
     "id": "3-contra-todos-game",
@@ -164,7 +212,7 @@
       "HUD pixel-perfect com coordenadas Figma",
       "🛡️ Verifier hook ativo"
     ],
-    "lastActivity": "2026-04-30"
+    "lastActivity": "2026-05-23"
   },
   {
     "id": "3-contra-todos-landing",
@@ -180,7 +228,7 @@
     ],
     "description": "Landing page promocional do jogo 3 Contra Todos no domínio 3contratodos.com.",
     "highlights": [],
-    "lastActivity": "2026-04-26"
+    "lastActivity": "2026-05-02"
   },
   {
     "id": "3-contra-todos-social",
@@ -197,7 +245,7 @@
     ],
     "description": "Templates de feed/stories e scripts de export para campanhas sociais (apenas local).",
     "highlights": [],
-    "lastActivity": "2026-04-26"
+    "lastActivity": "2026-05-22"
   },
   {
     "id": "ai-control-panel",
@@ -222,7 +270,7 @@
       "Integração com n8n workflows",
       "Next.js App Router"
     ],
-    "lastActivity": "2026-04-30"
+    "lastActivity": "2026-05-23"
   },
   {
     "id": "ai-research",
@@ -245,7 +293,7 @@
       "Integração com Obsidian vault",
       "🛡️ Verifier hook ativo"
     ],
-    "lastActivity": "2026-04-30"
+    "lastActivity": "2026-05-23"
   },
   {
     "id": "ai-router",
@@ -315,7 +363,7 @@
       "Início 2026-04-15",
       "🛡️ Verifier hook ativo"
     ],
-    "lastActivity": "2026-04-30"
+    "lastActivity": "2026-05-21"
   },
   {
     "id": "publi",
@@ -337,6 +385,6 @@
       "Mockups standalone",
       "🛡️ Verifier hook ativo"
     ],
-    "lastActivity": "2026-05-04"
+    "lastActivity": "2026-05-23"
   }
 ]

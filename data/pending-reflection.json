@@ -1,14 +1,15 @@
 {
-  "date": "2026-05-16",
+  "date": "2026-05-23",
   "status": "completed",
-  "generatedAt": "2026-05-16T22:08:41.390617-03:00",
-  "completedAt": "2026-05-17T02:54:31.216039+00:00",
+  "completedAt": "2026-05-23T22:15:00-03:00",
   "completedBy": "agent",
+  "generatedAt": "2026-05-23T22:03:02.853455-03:00",
   "projectsModified": [
     "alugueis-bea",
     "claude-hub",
     "thiago-zeni",
-    "game"
+    "game",
+    "materiais-social-media"
   ],
   "gitSummary": [
     {
@@ -26,39 +27,35 @@
     },
     {
       "project": "eat-kitchen-concierge",
-      "hasGit": true,
+      "hasGit": false,
       "commits": 0,
       "messages": [],
       "uncommitted": 0,
       "uncommittedFiles": [],
       "recentFiles": [],
-      "latestCommit": {
-        "hash": "c6033cd",
-        "message": "chore(security): complementa .gitignore"
-      }
+      "latestCommit": null
     },
     {
       "project": "alugueis-bea",
       "hasGit": true,
       "commits": 0,
       "messages": [],
-      "uncommitted": 10,
+      "uncommitted": 9,
       "uncommittedFiles": [
         "M scrapers/vila_rica.py",
         "?? _migrate_pdfs.py",
-        "?? dashboard/app_canary.py",
         "?? dashboard/enrich_canary.py",
-        "?? dashboard/queries_canary.py",
         "?? db/rls.sql",
         "?? explorar_ritzel_extrato.py",
         "?? explorar_ritzel_extrato2.py",
         "?? explorar_vilarica_pdf.py",
-        "?? extratos/"
+        "?? extratos/",
+        "?? infra-recomendada.md"
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "0a8c319",
-        "message": "fix(trott): mes do boleto = mês do vencimento (era mês anterior)"
+        "hash": "d61d90e",
+        "message": "fix(dashboard): boletos em aberto usam signed URL do Supabase Storage"
       }
     },
     {
@@ -66,9 +63,11 @@
       "hasGit": true,
       "commits": 0,
       "messages": [],
-      "uncommitted": 16,
+      "uncommitted": 18,
       "uncommittedFiles": [
         "M app.js",
+        "M data/pending-reflection.json",
+        "M data/projects.json",
         "M data/skills.json",
         "M index.html",
         "M scripts/daily-reflection.py",
@@ -87,8 +86,8 @@
       ],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "af3024f",
-        "message": "chore(reflection): entrada diária 2026-05-13"
+        "hash": "c445141",
+        "message": "chore(reflection): entrada diária 2026-05-16"
       }
     },
     {
@@ -100,8 +99,8 @@
       "uncommittedFiles": [],
       "recentFiles": [],
       "latestCommit": {
-        "hash": "5b5b488",
-        "message": "chore(site): remove pagina /logo/ (aprovacao do logo)"
+        "hash": "2cd496b",
+        "message": "feat(favicon): adiciona favicon completo a partir do simbolo da chama"
       }
     },
     {
@@ -125,9 +124,11 @@
       "hasGit": true,
       "commits": 0,
       "messages": [],
-      "uncommitted": 1,
+      "uncommitted": 3,
       "uncommittedFiles": [
-        "?? .claude/worktrees/"
+        "M android/app/build.gradle",
+        "?? .claude/worktrees/",
+        "?? infra-recomendada.md"
       ],
       "recentFiles": [],
       "latestCommit": {
@@ -153,8 +154,10 @@
       "hasGit": true,
       "commits": 0,
       "messages": [],
-      "uncommitted": 0,
-      "uncommittedFiles": [],
+      "uncommitted": 1,
+      "uncommittedFiles": [
+        "M README.md"
+      ],
       "recentFiles": [],
       "latestCommit": {
         "hash": "4126645",
@@ -162,6 +165,6 @@
       }
     }
   ],
-  "suggestedTitle": "Trabalho em alugueis-bea, claude-hub, thiago-zeni, game",
+  "suggestedTitle": "Trabalho em alugueis-bea, claude-hub, thiago-zeni, game, materiais-social-media",
   "note": "Abra o dashboard > Evolução > Diário para completar a reflexão."
 }

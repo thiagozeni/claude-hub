@@ -1,5 +1,21 @@
 [
   {
+    "id": "log-033",
+    "date": "2026-05-23",
+    "project": "alugueis-bea",
+    "title": "Canary pipeline completo: enrichment strategy Go→Python + boletos com signed URL",
+    "learned": [
+      "Replicar PDF parsing complexo (Playwright 2-passos, cookies PHPSESSID, HTML scrape) em Go CLI exigiria 100% de refatoração do scraper Python — copiar valor_bruto/taxa_r/iptu/outras_ded do canon Python para receitas_cli via enrich_canary.py é estratégia honesta que mantém o canary testando a métrica de cutover (valor_liquido) sem duplicar manutenção; o comentário 'ESTRATÉGIA HONESTA' no código documenta o trade-off para futuros mantenedores",
+      "Supabase Storage não tem rename nativo e não serve arquivos privados via URL pública — boletos em aberto exigem signed URLs geradas on-demand (storage.from().create_signed_url()); hardcodar URL pública não funciona para buckets privados, independente de RLS",
+      "Documentar as 4 etapas do pipeline canary ordenadas como comentário de uso no próprio script (run_all.py → carteira-sync → upsert-supabase → enrich_canary) cria 'README executável': qualquer chamada fora de ordem produz NULLs inesperados em valor_bruto, tornando a dependência de ordem explícita sem arquivo separado"
+    ],
+    "highlight": "Pipeline canary consolidado com 4 etapas ordenadas e estratégia de enriquecimento que evita reescrever parser Python complexo no Go CLI. Dashboard de boletos em aberto migrado para signed URLs do Supabase Storage — o único padrão correto para arquivos em buckets privados.",
+    "commit": "d61d90e",
+    "toolsUsed": [],
+    "skillsUsed": [],
+    "agentsUsed": []
+  },
+  {
     "id": "log-032",
     "date": "2026-05-16",
     "project": "alugueis-bea",
@@ -448,7 +464,7 @@
     ],
     "agentsUsed": [],
     "commit": "3e2387b",
-    "version": "cases individuais — 5 pages, SEO, sitemap, scroll reveal, accordion state",
+    "version": "casos individuais — 5 pages, SEO, sitemap, scroll reveal, accordion state",
     "highlight": "Abordagem de site pessoal com pages de case separadas maximiza SEO sem complexidade de build. Persistência de estado do accordion via sessionStorage é padrão simples mas de alto impacto na experiência."
   },
   {

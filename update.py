@@ -14,16 +14,26 @@ O que faz:
 import json
 import os
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 DASHBOARD_DIR = Path(__file__).parent
 DATA_DIR = DASHBOARD_DIR / "data"
+sys.path.insert(0, str(DASHBOARD_DIR / "scripts"))
 CLAUDE_DIR = Path("/Users/pro15/Claude")
 CLAUDE_MD = CLAUDE_DIR / "CLAUDE.md"
 
 SKIP_DIRS = {".git", "node_modules", ".DS_Store", "__pycache__", ".cache",
              ".venv", "venv", "dist", "build", ".next"}
+
+# Diretórios que NÃO são projetos individuais (containers ou infra do workspace)
+# Subprojetos dentro de containers já estão registrados separadamente no projects.json.
+NON_PROJECT_DIRS = {
+    "3-contra-todos",   # container — sub: -game, -landing, -social já cadastrados
+    "verifier-mvp",     # infra (hook pós-turn do Claude Code)
+    "_archive",         # arquivo histórico
+}
 
 # Projetos cujo path é muito amplo: lista de arquivos específicos a verificar
 SPECIFIC_FILES = {
@@ -118,7 +128,10 @@ def update_projects():
     # Detecta diretórios novos em /Users/pro15/Claude/ não cadastrados
     if CLAUDE_DIR.exists():
         for entry in sorted(CLAUDE_DIR.iterdir()):
-            if entry.is_dir() and entry.name not in known_ids and not entry.name.startswith("."):
+            if (entry.is_dir()
+                    and entry.name not in known_ids
+                    and entry.name not in NON_PROJECT_DIRS
+                    and not entry.name.startswith(".")):
                 print(f"  [aviso] Novo diretório não cadastrado: {entry.name}")
 
     if changed:
@@ -276,9 +289,58 @@ def update_claude_md_git_state(states: list[dict]):
 # Main
 # ---------------------------------------------------------------------------
 
+def update_security():
+    """Run security scan and persist findings to data/security.json."""
+    try:
+        import security_scan  # type: ignore
+    except ImportError as exc:
+        print(f"  [aviso] security_scan não importou: {exc}")
+        return
+
+    output = DATA_DIR / "security.json"
+    result = security_scan.run_scan(output)
+    s = result["summary"]
+    total = sum(s.values())
+    print(
+        f"  ok security.json — {total} findings "
+        f"(crit {s['critical']} · high {s['high']} · med {s['medium']} · low {s['low']})"
+    )
+
+
+def update_skills_and_agents():
+    """Sincroniza skills.json e agents.json com ~/.claude/skills e ~/.claude/agents."""
+    try:
+        result = subprocess.run(
+            ["python3", str(DASHBOARD_DIR / "scripts" / "sync-skills.py"), "--apply"],
+            capture_output=True, text=True, timeout=30,
+        )
+        last = [l for l in result.stdout.splitlines() if l.strip()]
+        for line in last[-3:]:
+            print(f"  {line}")
+    except Exception as exc:
+        print(f"  [aviso] sync-skills falhou: {exc}")
+
+
+def update_printed_clis():
+    """Sincroniza printed-clis.json com ~/printing-press/library/*/."""
+    try:
+        result = subprocess.run(
+            ["python3", str(DASHBOARD_DIR / "scripts" / "sync_printed_clis.py")],
+            capture_output=True, text=True, timeout=30,
+        )
+        last = [l for l in result.stdout.splitlines() if l.strip()]
+        for line in last[-2:]:
+            print(f"  {line}")
+    except Exception as exc:
+        print(f"  [aviso] sync_printed_clis falhou: {exc}")
+
+
 def main():
     print("Claude Hub — atualizando dados...")
     update_projects()
+    update_skills_and_agents()
+    update_printed_clis()
+    update_security()
 
     # Scan all project subdirectories (skip hidden dirs and plain files)
     project_dirs = sorted(

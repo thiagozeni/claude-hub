@@ -51,6 +51,14 @@
         MCPs / Tools
       </button>
 
+      <button class="nav-item" data-target="printedclis">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 4h10v3H3zM3 7v5h10V7M5 12v2h6v-2" />
+          <circle cx="5" cy="5.5" r="0.5" fill="currentColor" />
+        </svg>
+        Printed CLIs
+      </button>
+
       <div class="nav-section-label">Projetos</div>
 
       <button class="nav-item" data-target="processos">
@@ -191,6 +199,16 @@
         <p class="page-subtitle">Servidores MCP conectados e ferramentas CLI instaladas no ambiente.</p>
       </div>
       <div id="mcps-content"></div>
+    </section>
+
+    <!-- PRINTED CLIs -->
+    <section id="printedclis" class="page hidden" aria-labelledby="printedclis-title">
+      <div class="page-header">
+        <h1 class="page-title" id="printedclis-title">Printed CLIs</h1>
+        <p class="page-subtitle">CLIs e MCP servers gerados pelo <a href="https://github.com/mvanhorn/cli-printing-press" target="_blank" rel="noopener">Printing Press</a> em <code>~/printing-press/library/</code>.</p>
+      </div>
+      <div class="printed-clis-toolbar" id="printedclis-toolbar"></div>
+      <div class="cards-grid two-col" id="printedclis-grid" aria-live="polite"></div>
     </section>
 
     <!-- CHEATSHEET -->

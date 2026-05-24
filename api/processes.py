@@ -336,6 +336,8 @@ def _launchd_dashboard_info() -> ProcessInfo:
     """Snapshot do claude-hub lendo do próprio processo Python atual."""
     import time
 
+    from server import PORT  # lazy: evita import circular (server importa este módulo)
+
     pid = os.getpid()
     mem = _rss_bytes(pid)
 
@@ -348,7 +350,7 @@ def _launchd_dashboard_info() -> ProcessInfo:
         memory=mem,
         uptime_ms=int((time.time() - _START_TIME) * 1000),
         restarts=0,
-        port=8080,
+        port=PORT,
         cwd=str(Path(__file__).parent.parent),
         managed_by="launchd",
     )
