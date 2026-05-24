@@ -1,5 +1,86 @@
 [
   {
+    "id": "_archived_2026-04-28/continuous-learning",
+    "name": "continuous-learning",
+    "description": "Automatically extract reusable patterns from Claude Code sessions and save them as learned skills for future use.",
+    "needsReview": true,
+    "origin": "_archived_2026-04-28",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "_archived_2026-04-28/kwp-campaign-plan",
+    "name": "campaign-plan",
+    "description": "Generate a full campaign brief with objectives, audience, messaging, channel strategy, content calendar, and success metrics. Use when planning a product launch, lead-gen push, or awareness campaign, when you need a week-by-week content calendar with dependencies, or when translating a marketing goa",
+    "needsReview": true,
+    "origin": "_archived_2026-04-28",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "_archived_2026-04-28/kwp-competitive-brief",
+    "name": "competitive-brief",
+    "description": "Research competitors and generate a positioning and messaging comparison with content gaps, opportunities, and threats. Use when building sales battlecards, when finding positioning gaps and messaging angles competitors haven't claimed, or when a competitor makes a move and you need to assess the im",
+    "needsReview": true,
+    "origin": "_archived_2026-04-28",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "_archived_2026-04-28/kwp-content-creation",
+    "name": "content-creation",
+    "description": "Draft marketing content across channels — blog posts, social media, email newsletters, landing pages, press releases, and case studies. Use when writing any marketing content, when you need channel-specific formatting, SEO-optimized copy, headline options, or calls to action.",
+    "needsReview": true,
+    "origin": "_archived_2026-04-28",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "_archived_2026-04-28/kwp-email-sequence",
+    "name": "email-sequence",
+    "description": "Design and draft multi-email sequences with full copy, timing, branching logic, exit conditions, and performance benchmarks. Use when building onboarding, lead nurture, re-engagement, win-back, or product launch flows, when you need a complete drip campaign with A/B test suggestions, or when mapping",
+    "needsReview": true,
+    "origin": "_archived_2026-04-28",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "_archived_2026-04-28/kwp-seo-audit",
+    "name": "seo-audit",
+    "description": "Run a comprehensive SEO audit — keyword research, on-page analysis, content gaps, technical checks, and competitor comparison. Use when assessing a site's SEO health, when finding keyword opportunities and content gaps competitors own, or when you need a prioritized action plan split into quick wins",
+    "needsReview": true,
+    "origin": "_archived_2026-04-28",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "_archived_2026-04-28/marketing-ideas",
+    "name": "marketing-ideas",
+    "description": "Generate 5 creative, cost-effective marketing ideas with channels, messaging, and engagement rationale. Use when brainstorming marketing campaigns, planning product promotion, or looking for creative marketing tactics.",
+    "needsReview": true,
+    "origin": "_archived_2026-04-28",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "_archived_2026-04-28/mkt-seo-audit",
+    "name": "seo-audit",
+    "description": "When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions \"SEO audit,\" \"technical SEO,\" \"why am I not ranking,\" \"SEO issues,\" \"on-page SEO,\" \"meta tags review,\" \"SEO health check,\" \"my traffic dropped,\" \"lost rankings,\" \"not showing up in Google,\" \"s",
+    "needsReview": true,
+    "origin": "_archived_2026-04-28",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "_archived_2026-04-28/pricing-strategy",
+    "name": "pricing-strategy",
+    "description": "Analyze and design pricing strategies including pricing models, competitive pricing analysis, willingness-to-pay estimation, and price elasticity. Use when setting prices, evaluating pricing models, preparing for a pricing change, or comparing freemium vs paid approaches.",
+    "needsReview": true,
+    "origin": "_archived_2026-04-28",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
     "id": "ab-test-analysis",
     "name": "ab-test-analysis",
     "origin": "built-in",
@@ -1442,6 +1523,15 @@
     "trigger": "Peça estratégia de deploy, Dockerfile, pipeline CI/CD ou rollback de produção"
   },
   {
+    "id": "design-md",
+    "name": "design-md",
+    "description": "Apply real-world design systems from 54+ top brands (Claude, Vercel, Stripe, Figma, Linear, Notion, Spotify, Apple, etc.) to any project using curated DESIGN.md files. Use this skill whenever the user mentions design systems, DESIGN.md, brand design, design tokens, wants to match a specific brand's ",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Design & Frontend",
+    "trigger": ""
+  },
+  {
     "id": "design-system",
     "name": "design-system",
     "origin": "built-in",
@@ -1678,6 +1768,69 @@
     "trigger": ""
   },
   {
+    "id": "google-agents-cli-adk-code",
+    "name": "google-agents-cli-adk-code",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "google-agents-cli-deploy",
+    "name": "google-agents-cli-deploy",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Dev & Infra",
+    "trigger": ""
+  },
+  {
+    "id": "google-agents-cli-eval",
+    "name": "google-agents-cli-eval",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "google-agents-cli-observability",
+    "name": "google-agents-cli-observability",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "google-agents-cli-publish",
+    "name": "google-agents-cli-publish",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "google-agents-cli-scaffold",
+    "name": "google-agents-cli-scaffold",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "google-agents-cli-workflow",
+    "name": "google-agents-cli-workflow",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
     "id": "grammar-check",
     "name": "grammar-check",
     "origin": "built-in",
@@ -1747,6 +1900,24 @@
     "trigger": ""
   },
   {
+    "id": "higgsfield-prompts",
+    "name": "higgsfield-prompts",
+    "description": "Guia de seleção de modelo e estrutura de prompt para gerar imagem e vídeo via MCP Higgsfield. Cobre os 20+ modelos disponíveis (Nano Banana, Soul, Seedream, Flux, GPT Image, Veo 3.1, Kling 3, Seedance 2, Cinema Studio, Marketing Studio), aspect ratios, duração, parâmetros específicos, vocabulário de",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "huashu-design",
+    "name": "huashu-design",
+    "description": "花叔Design（Huashu-Design）——用HTML做高保真原型、交互Demo、幻灯片、动画、设计变体探索+设计方向顾问+专家评审的一体化设计能力。HTML是工具不是媒介，根据任务embody不同专家（UX设计师/动画师/幻灯片设计师/原型师），避免web design tropes。触发词：做原型、设计Demo、交互原型、HTML演示、动画Demo、设计变体、hi-fi设计、UI mockup、prototype、设计探索、做个HTML页面、做个可视化、app原型、iOS原型、移动应用mockup、导出MP4、导出GIF、60fps视频、设计风格、设计方向、设计哲学、配色方案、视觉风",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Design & Frontend",
+    "trigger": ""
+  },
+  {
     "id": "ideal-customer-profile",
     "name": "ideal-customer-profile",
     "origin": "built-in",
@@ -1767,6 +1938,15 @@
     "id": "identify-assumptions-new",
     "name": "identify-assumptions-new",
     "description": "Identify risky assumptions for a new product idea across 8 risk categories including Go-to-Market, Strategy, and Team. Use when evaluating startup risks, assessing a new product concept, or mapping assumptions for a new venture.",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "impeccable",
+    "name": "impeccable",
+    "description": "Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding, ",
     "needsReview": true,
     "origin": "auto-sync",
     "category": "Utilitários",
@@ -2715,6 +2895,87 @@
     "trigger": ""
   },
   {
+    "id": "printing-press",
+    "name": "printing-press",
+    "description": "Generate a ship-ready CLI for an API with a lean research -> generate -> build -> shipcheck loop.",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "printing-press-catalog",
+    "name": "printing-press-catalog",
+    "description": "Browse and install pre-built Go CLIs for popular APIs from the catalog",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "printing-press-import",
+    "name": "printing-press-import",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "printing-press-output-review",
+    "name": "printing-press-output-review",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Dev Patterns",
+    "trigger": ""
+  },
+  {
+    "id": "printing-press-polish",
+    "name": "printing-press-polish",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "printing-press-publish",
+    "name": "printing-press-publish",
+    "description": "Publish a generated CLI to the printing-press-library repo",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "printing-press-reprint",
+    "name": "printing-press-reprint",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "printing-press-retro",
+    "name": "printing-press-retro",
+    "description": ">",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "printing-press-score",
+    "name": "printing-press-score",
+    "description": "Score a generated CLI against the Steinberger bar, compare two CLIs side-by-side",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
     "id": "prioritization-frameworks",
     "name": "prioritization-frameworks",
     "description": "Reference guide to 9 prioritization frameworks with formulas, when-to-use guidance, and templates — RICE, ICE, Kano, MoSCoW, Opportunity Score, and more. Use when selecting a prioritization method, comparing frameworks like RICE vs ICE, or learning how different prioritization approaches work.",
@@ -3592,6 +3853,15 @@
     "trigger": "Peça análise de sentimento, classificação de feedback ou scoring de NPS"
   },
   {
+    "id": "sentry-cli",
+    "name": "sentry-cli",
+    "description": "Guide for using the Sentry CLI to interact with Sentry from the command line. Use when the user asks about viewing issues, events, projects, organizations, making API calls, or authenticating with Sentry via CLI.",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
     "id": "seo-audit",
     "name": "seo-audit",
     "description": "Audita SEO de sites estáticos e implementa correções. Analisa meta tags, Open Graph, Twitter Card, JSON-LD Schema.org, robots.txt, sitemap.xml, estrutura de headings, alt text e conteúdo renderizado por JS.",
@@ -3950,6 +4220,15 @@
     "id": "token-budget-advisor",
     "name": "token-budget-advisor",
     "description": ">-",
+    "needsReview": true,
+    "origin": "auto-sync",
+    "category": "Utilitários",
+    "trigger": ""
+  },
+  {
+    "id": "totvs-chef-integration",
+    "name": "totvs-chef-integration",
+    "description": "Use sempre que o usuário precisar integrar com TOTVS Chef / TOTVS Food Service PDV via API de Pedidos Online — incluindo enviar pedidos (delivery, mesa, cartão, balcão, pedido de venda), consultar status do estabelecimento, baixar cardápio, autenticar funcionários/garçons, fechar conta, efetuar paga",
     "needsReview": true,
     "origin": "auto-sync",
     "category": "Utilitários",

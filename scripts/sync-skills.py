@@ -75,15 +75,25 @@ def parse_frontmatter(md_path: Path) -> dict:
 def collect_skills() -> dict[str, dict]:
     """Retorna {id: {...}} varrendo recursivamente todos os SKILL.md sob ~/.claude/skills.
     O id usa o caminho relativo (ex: 'ai-research-15-rag/chroma') pra evitar colisão
-    de nomes entre sub-skills de pilares diferentes."""
+    de nomes entre sub-skills de pilares diferentes.
+    Segue symlinks (skills instaladas via ~/.agents/skills/ aparecem como links)."""
     out = {}
     if not SKILLS_DIR.exists():
         return out
-    for skill_md in sorted(SKILLS_DIR.rglob("SKILL.md")):
-        rel = skill_md.parent.relative_to(SKILLS_DIR)
+    found = []
+    for root, dirs, files in os.walk(SKILLS_DIR, followlinks=True):
+        # Evita recursão infinita em loops de symlink
+        dirs[:] = [d for d in dirs if not d.startswith("_archived")]
+        if "SKILL.md" in files:
+            found.append(Path(root) / "SKILL.md")
+    for skill_md in sorted(found):
+        try:
+            rel = skill_md.parent.resolve().relative_to(SKILLS_DIR.resolve())
+        except ValueError:
+            # symlink target fora de SKILLS_DIR — usa o caminho via link
+            rel = skill_md.parent.relative_to(SKILLS_DIR) if SKILLS_DIR in skill_md.parents else Path(skill_md.parent.name)
         sid = str(rel)
         fm = parse_frontmatter(skill_md)
-        # pilar = primeiro segmento do path quando há aninhamento (ex: ai-research-15-rag)
         parts = rel.parts
         pillar = parts[0] if len(parts) > 1 else None
         out[sid] = {
